@@ -10,16 +10,14 @@ import javax.persistence.*;
 @Table(name = "member")
 @Getter @Setter @ToString
 public class Member {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
     @Column(unique = true)
     private String username;
 
-    private String password1;
-
-    private String password2;
+    private String password;
 
     @Column(unique = true)
     private String nickname;
