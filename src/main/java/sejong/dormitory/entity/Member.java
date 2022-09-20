@@ -5,21 +5,26 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "member")
 @Getter @Setter @ToString
 public class Member {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
+
+    @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Board> boardList = new ArrayList<>();
+    @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<BoardComment> boardCommentList = new ArrayList<>();
 
     @Column(unique = true)
     private String username;
 
-    private String password1;
-
-    private String password2;
+    private String password;
 
     @Column(unique = true)
     private String nickname;
