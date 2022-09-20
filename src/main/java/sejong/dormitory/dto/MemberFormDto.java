@@ -23,6 +23,9 @@ public class MemberFormDto {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}", message = "올바르지 않은 형식의 비밀번호입니다.")
     private String password2;
 
+    @NotEmpty(message = "닉네임 입력은 필수입니다.")
+    private String nickname;
+
     @NotEmpty(message = "지역 입력은 필수입니다.")
     private String local;
 
