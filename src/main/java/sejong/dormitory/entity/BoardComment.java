@@ -24,6 +24,7 @@ public class BoardComment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
     private String content;
     private LocalDateTime dateTime;
     private String createdBy;
