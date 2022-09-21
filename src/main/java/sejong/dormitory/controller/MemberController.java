@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sejong.dormitory.dto.MemberFormDto;
@@ -18,7 +17,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/members")
 @RequiredArgsConstructor
-public class MemberContoller {
+public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
