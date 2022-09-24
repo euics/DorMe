@@ -39,4 +39,8 @@ public class MemberService implements UserDetailsService {
                 .password(member.getPassword())
                 .build();
     }
+
+    public Member findByUsername(String username){
+        return memberRepository.findByUsername(username);
+    }
 }
