@@ -1,8 +1,6 @@
 package sejong.dormitory.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,7 +12,7 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Getter @Setter
 public class Board {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +35,55 @@ public class Board {
 
     private String title;
     private String content;
-    private LocalDateTime dateTime;
+    private String dateTime;
     private String createdBy;
+    private Long countVisit;
+
+    public void addPhoto(Photo photo) {
+        this.photo.add(photo);
+
+        // 게시글에 파일이 저장되어있지 않은 경우
+        if(photo.getBoard() != this)
+            // 파일 저장
+            photo.setBoard(this);
+    }
+
+
+    @Builder
+    public Board(String title, String content, String dateTime, String createdBy,
+                 Long countVisit, Member member, List<BoardComment> boardCommentList,List<Photo> photo) {
+        this.title = title;
+        this.content = content;
+        this.dateTime = dateTime;
+        this.createdBy = createdBy;
+        this.countVisit = countVisit;
+        if (this.member != null) {
+            member.getBoardList().remove(this);
+        }
+        this.boardCommentList = boardCommentList;
+        this.photo = photo;
+    }
+
+    public void updateVisit(Long countVisit) {
+        this.countVisit = countVisit;
+    }
+
+    public void update(String title, String content, String dateTime)
+    {
+        this.title = title;
+        this.content = content;
+        this.dateTime = dateTime;
+    }
+
+    public Board(Member member,String title, String content, String dateTime,
+                 String createdBy, Long countVisit) {
+        this.member =member;
+        this.title = title;
+        this.content = content;
+        this.dateTime = dateTime;
+        this.createdBy = createdBy;
+        this.countVisit =countVisit;
+    }
+
 
 }
