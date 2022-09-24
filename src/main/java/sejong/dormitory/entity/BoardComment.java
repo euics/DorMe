@@ -1,6 +1,7 @@
 package sejong.dormitory.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,7 +27,28 @@ public class BoardComment {
     private Member member;
 
     private String content;
-    private LocalDateTime dateTime;
+    private String dateTime;
     private String createdBy;
+
+    @Builder
+    public BoardComment(String content, String dateTime,
+                        String createdBy, Board board, Member member) {
+        this.content = content;
+        this.dateTime = dateTime;
+        this.createdBy = createdBy;
+        if(this.board != null){
+            board.getBoardCommentList().remove(this);
+        }else
+            this.board = board;
+        if(this.member != null){
+            member.getBoardCommentList().remove(this);
+        }else
+            this.member = member;
+    }
+
+    public void update(String content, String dateTime){
+        this.content = content;
+        this.dateTime = dateTime;
+    }
 
 }
