@@ -1,8 +1,10 @@
 package sejong.dormitory.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import sejong.dormitory.entity.Board;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
-
+    Page<Board> searchByTitleOrContent(String title, String content, Pageable pageable);
 }
