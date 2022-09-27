@@ -125,7 +125,7 @@ public class BoardController {
         if(!board.getCreatedBy().equals(member.getNickname()))
             throw new Exception("수정 권한이 없습니다.");
 
-        boardService.deletePost(member.getId(),id);
+        boardService.deletePost(id);
         return "board/boardForm";
     }
 
@@ -133,26 +133,17 @@ public class BoardController {
     public String editPost(@PathVariable("id") Long id,
                            @RequestParam(value="file", required=false) List<MultipartFile> files,
                            @RequestParam(value="title") String title,
-                           @RequestParam(value="content") String content,
-                           Authentication authentication) throws Exception{
-
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String username = userDetails.getUsername();
-        Member member = memberService.findByUsername(username);
-        Board board = boardService.findById(id);
-
-        String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                           @RequestParam(value="content") String content
+                           ) throws Exception{
 
         BoardDto boardDto =
                 BoardDto.builder()
-                        .member(member)
                         .title(title)
                         .content(content)
-                        .dateTime(dateTime)
-                        .createdBy(member.getNickname())
                         .countVisit(1L)
                         .build();
-        boardService.createBoard(boardDto, files);
+
+        boardService.updatePost(id,boardDto,files);
         return "redirect:/boards/";
     }
 
@@ -167,7 +158,7 @@ public class BoardController {
 
         if(!board.getCreatedBy().equals(member.getNickname()))
             throw new Exception("삭제 권한이 없습니다.");
-        boardService.deletePost(member.getId(),id);
+        boardService.deletePost(id);
         return "redirect:/boards/";
     }
 
