@@ -58,19 +58,27 @@ public class BoardService {
     }
 
     @Transactional
-    public void updatePost(Long id, BoardDto boardDto){
+    public void updatePost(Long id, BoardDto boardDto,
+                           List<MultipartFile> files) throws Exception{
         Board board = boardRepository.findById(id).orElseThrow((() ->
                 new IllegalStateException("해당 게시글이 존재하지 않습니다.")));
 
-        String created_date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        board.update(boardDto.getTitle(),boardDto.getContent(),created_date);
+        List<Photo> photoList = fileHandler.parseFileInfo(files);
+        // 파일이 존재할 때에만 처리
+        if(!photoList.isEmpty()) {
+            for(Photo photo : photoList) {
+                board.addPhoto(photoRepository.save(photo));
+            }
+        }
+
+        String created_date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        board.update(boardDto.getTitle(),boardDto.getContent(),created_date,photoList);
     }
 
     @Transactional
-    public void deletePost(Long memberId, Long boardId) {
+    public void deletePost(Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow((() ->
                 new IllegalStateException("해당 게시글이 존재하지 않습니다.")));
-        Member member = memberRepository.findById(memberId).get();
 
         boardRepository.delete(board);
     }
