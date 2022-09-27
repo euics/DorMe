@@ -29,8 +29,7 @@ public class Board {
     private List<BoardComment> boardCommentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "board",
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-            orphanRemoval = true)
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Photo> photo = new ArrayList<>();
 
     private String title;
@@ -68,16 +67,18 @@ public class Board {
         this.countVisit = countVisit;
     }
 
-    public void update(String title, String content, String dateTime)
+    public void update(String title, String content, String dateTime,
+                       List<Photo> photo)
     {
         this.title = title;
         this.content = content;
         this.dateTime = dateTime;
+        this.photo = photo;
     }
 
     public Board(Member member,String title, String content, String dateTime,
                  String createdBy, Long countVisit) {
-        this.member =member;
+        this.member = member;
         this.title = title;
         this.content = content;
         this.dateTime = dateTime;
