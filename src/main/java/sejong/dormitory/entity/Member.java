@@ -1,8 +1,6 @@
 package sejong.dormitory.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import sejong.dormitory.dto.MemberFormDto;
 
@@ -13,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "member")
 @Getter @Setter @ToString
+@NoArgsConstructor
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,5 +46,14 @@ public class Member {
         member.setSchool(memberFormDto.getSchool());
 
         return member;
+    }
+
+    @Builder
+    public Member(String username, String password, String nickname, String local, String school) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.local = local;
+        this.school = school;
     }
 }
