@@ -6,5 +6,5 @@ import sejong.dormitory.entity.BoardComment;
 import java.util.List;
 
 public interface BoardCommentRepository extends JpaRepository<BoardComment, Long> {
-    List<BoardComment> findBoardCommentsByBoardId(Long boardId);
+    List<BoardComment> findBoardCommentsByBoardId(Long id);
 }
