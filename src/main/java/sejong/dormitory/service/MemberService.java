@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sejong.dormitory.dto.MemberFormDto;
 import sejong.dormitory.entity.Member;
 import sejong.dormitory.repository.MemberRepository;
 
@@ -16,15 +17,12 @@ import sejong.dormitory.repository.MemberRepository;
 public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
-    public Member saveMember(Member member){
-        validateDuplicateMember(member);
-        return memberRepository.save(member);
-    }
-
-    private void validateDuplicateMember(Member member) {
-        Member findMember = memberRepository.findByUsername(member.getUsername());
+    public void validateDuplicateMemberFormDto(MemberFormDto memberFormDto) {
+        Member findMember = memberRepository.findByUsername(memberFormDto.getUsername());
         if(findMember != null)
             throw new IllegalStateException("이미 가입된 회원입니다.");
+        if(!memberFormDto.getPassword1().equals(memberFormDto.getPassword2()))
+            throw new IllegalStateException("비밀번호가 일치하지 않습니다.");
     }
 
     @Override
