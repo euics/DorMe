@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sejong.dormitory.dto.MemberFormDto;
 import sejong.dormitory.entity.Member;
+import sejong.dormitory.repository.MemberRepository;
 import sejong.dormitory.service.MemberService;
 
 import javax.validation.Valid;
@@ -20,6 +21,7 @@ import javax.validation.Valid;
 public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final MemberRepository memberRepository;
 
     @GetMapping("/new")
     public String memberForm(Model model){
@@ -35,8 +37,9 @@ public class MemberController {
             return "member/memberForm";
 
         try {
+            memberService.validateDuplicateMemberFormDto(memberFormDto);
             Member member = Member.createMember(memberFormDto, passwordEncoder);
-            memberService.saveMember(member);
+            memberRepository.save(member);
         } catch (IllegalStateException e){
             model.addAttribute("errorMessage", e.getMessage());
             return "member/memberForm";
