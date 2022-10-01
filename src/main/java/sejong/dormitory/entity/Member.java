@@ -2,6 +2,7 @@ package sejong.dormitory.entity;
 
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import sejong.dormitory.constant.Role;
 import sejong.dormitory.dto.MemberFormDto;
 
 import javax.persistence.*;
@@ -35,6 +36,9 @@ public class Member {
 
     private String school;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
         String password = passwordEncoder.encode(memberFormDto.getPassword1());
@@ -44,6 +48,7 @@ public class Member {
         member.setNickname(memberFormDto.getNickname());
         member.setLocal(memberFormDto.getLocal());
         member.setSchool(memberFormDto.getSchool());
+        member.setRole(Role.USER);
 
         return member;
     }
