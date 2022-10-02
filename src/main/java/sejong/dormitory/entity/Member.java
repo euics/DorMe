@@ -52,13 +52,4 @@ public class Member {
 
         return member;
     }
-
-    @Builder
-    public Member(String username, String password, String nickname, String local, String school) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-        this.local = local;
-        this.school = school;
-    }
 }
