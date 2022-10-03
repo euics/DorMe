@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import sejong.dormitory.service.MemberService;
 
@@ -26,13 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/members/login")
                 .defaultSuccessUrl("/")
                 .failureUrl("/members/login/error")
-                .usernameParameter("username")
 
                 .and()
 
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
                 .logoutSuccessUrl("/");
+
+        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }
 
     @Bean
