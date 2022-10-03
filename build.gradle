@@ -36,6 +36,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.security:spring-security-test'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.springframework.security:spring-security-config'
 
 	// modelmapper 라이브러리
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
