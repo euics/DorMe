@@ -1,6 +1,5 @@
 package sejong.dormitory.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +64,7 @@ class MemberServiceTest {
         memberRepository.save(member1);
 
         Throwable e = assertThrows(IllegalStateException.class, () -> {
-            memberService.validateDuplicateMemberFormDto(memberFormDto2);
+            memberService.validateDuplicateIDPassword(memberFormDto2);
         });
 
         assertEquals(e.getMessage(), "이미 가입된 회원입니다.");
@@ -77,7 +76,7 @@ class MemberServiceTest {
         MemberFormDto memberFormDto = createDifferentPasswordMember();
 
         Throwable e = assertThrows(IllegalStateException.class, () -> {
-            memberService.validateDuplicateMemberFormDto(memberFormDto);
+            memberService.validateDuplicateIDPassword(memberFormDto);
         });
 
         assertEquals(e.getMessage(), "비밀번호가 일치하지 않습니다.");
