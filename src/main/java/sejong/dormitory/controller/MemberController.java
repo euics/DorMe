@@ -26,7 +26,7 @@ public class MemberController {
     @GetMapping("/new")
     public String memberForm(Model model){
         model.addAttribute("memberFormDto", new MemberFormDto());
-        return "member/memberForm";
+        return "member/memberRegister";
     }
 
     @PostMapping("/new")
@@ -34,15 +34,15 @@ public class MemberController {
                              BindingResult bindingResult,
                              Model model){
         if(bindingResult.hasFieldErrors())
-            return "member/memberForm";
+            return "member/memberRegister";
 
         try {
-            memberService.validateDuplicateMemberFormDto(memberFormDto);
+            memberService.validateDuplicateIDPassword(memberFormDto);
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberRepository.save(member);
         } catch (IllegalStateException e){
-            model.addAttribute("errorMessage", e.getMessage());
-            return "member/memberForm";
+            model.addAttribute("errorMessage_IDPassword", e.getMessage());
+            return "member/memberRegister";
         }
 
         return "redirect:/";
