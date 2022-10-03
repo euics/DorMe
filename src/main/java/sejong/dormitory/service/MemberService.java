@@ -17,7 +17,7 @@ import sejong.dormitory.repository.MemberRepository;
 public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
-    public void validateDuplicateMemberFormDto(MemberFormDto memberFormDto) {
+    public void validateDuplicateIDPassword(MemberFormDto memberFormDto) {
         Member findMember = memberRepository.findByUsername(memberFormDto.getUsername());
         if(findMember != null)
             throw new IllegalStateException("이미 가입된 회원입니다.");
