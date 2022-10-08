@@ -17,21 +17,17 @@ public class BoardDto {
     private Long id;
     private String title;
     private String content;
-    private String dateTime;
-    private String createdBy;
     private Long countVisit;
     private Member member;
     private List<MultipartFile> files;
 
     @Builder
-    public BoardDto(Long id, String title, String content, String dateTime,
-                    String createdBy, Long countVisit, Member member, List<MultipartFile> files) {
+    public BoardDto(Long id, String title, String content,
+                    Long countVisit, Member member, List<MultipartFile> files) {
         this.id = id;
         this.member = member;
         this.title = title;
         this.content = content;
-        this.dateTime = dateTime;
-        this.createdBy = createdBy;
         this.countVisit = countVisit;
         this.files = files;
     }
@@ -41,8 +37,6 @@ public class BoardDto {
         return Board.builder()
                 .title(title)
                 .content(content)
-                .dateTime(dateTime)
-                .createdBy(createdBy)
                 .countVisit(countVisit)
                 .build();
     }

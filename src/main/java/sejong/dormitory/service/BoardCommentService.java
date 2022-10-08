@@ -27,8 +27,7 @@ public class BoardCommentService {
 
         BoardComment boardComment = boardCommentRepository.findById(id).orElseThrow((() ->
                 new IllegalStateException("해당 댓글이 존재하지 않습니다.")));
-        String created_date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        boardComment.update(boardCommentDto.getContent(),created_date);
+        boardComment.update(boardCommentDto.getContent());
     }
 
     @Transactional
