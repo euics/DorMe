@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <link href="css/MainHome.css" rel="stylesheet" >
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <style>
+    </style>
+</head>
+<body>
+
+<nav th:replace="navbar :: navbarFragment"></nav>
+
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <h5 th:text="'제목 : ' + ${board.title}"></h5>
+            </div>
+            <div>
+                <td th:text="'작성자 : ' + ${board.createdBy}"></td>
+                <br><br>
+            </div>
+            <h5> 내용 </h5>
+            <div style="border:1px solid; padding:10px;">
+                <dl>
+                    <dd th:text="${board.content}"></dd>
+                </dl>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-info" onclick="window.location.reload()"><a th:href="@{'/board/editPost/' + ${board.id}}">수정</a></button>
+                <button type="submit" class="btn btn-secondary" onclick="window.location.reload()"><a th:href="@{'/board/postDelete/' + ${board.id}}">삭제</a></button>
+                <button type="button" class="btn btn-secondary pull-right" onclick="location.href='/boards/'">목록으로</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <table class="table table-hover">
+        <tr>
+            <th>작성자</th>
+            <th style="width: 65%;">내용</th>
+            <th style="width: 15%;">날짜</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="comment : ${comments}">
+            <td th:text="${comment.createdBy}"></td>
+            <td th:text="${comment.content}"></td>
+            <td th:text="${comment.regTime}"></td>
+            <td>
+                <a th:href="@{'/board/editBoardComment/' + ${board.id} +'?'+ 'commentId='+ ${comment.getId()}}" class="edit" title="Edit" data-toggle="tooltip" onclick="window.location.reload()"><i class="material-icons">&#xE254;</i></a>
+                <a th:href="@{'/board/deleteBoardComment/' + ${board.id} +'?'+ 'commentId=' + ${comment.getId()}}" class="delete" title="Delete" data-toggle="tooltip" onclick="window.location.reload()"><i class="material-icons">&#xE872;</i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="viewPost.html" th:action="@{'/boards/veiwPost/'+${board.getId()}}" method="post">
+        <div class="card mb-2 mt-5">
+            <div class="card-header bg-light">
+                <i class="fa fa-comment fa"></i> 댓글
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        <button type="submit" class="btn btn-info mt-3">등록</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>
