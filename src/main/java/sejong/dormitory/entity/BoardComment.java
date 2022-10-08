@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class BoardComment {
+public class BoardComment extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "boardComment_id")
@@ -27,15 +27,10 @@ public class BoardComment {
     private Member member;
 
     private String content;
-    private String dateTime;
-    private String createdBy;
 
     @Builder
-    public BoardComment(String content, String dateTime,
-                        String createdBy, Board board, Member member) {
+    public BoardComment(String content, Board board, Member member) {
         this.content = content;
-        this.dateTime = dateTime;
-        this.createdBy = createdBy;
         if(this.board != null){
             board.getBoardCommentList().remove(this);
         }else
@@ -46,9 +41,8 @@ public class BoardComment {
             this.member = member;
     }
 
-    public void update(String content, String dateTime){
+    public void update(String content){
         this.content = content;
-        this.dateTime = dateTime;
     }
 
 }
