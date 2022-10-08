@@ -28,11 +28,11 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
 
   /* 개발용 설정 */
-  
+
 }
 
-li{ list-style: none; } 
-a{ text-decoration: none; } 
+li{ list-style: none; }
+a{ text-decoration: none; }
 button{ cursor: pointer; }
 
 body{ background-color: #ededed; }
@@ -54,7 +54,7 @@ body{ background-color: #ededed; }
   margin:0 auto;
 } */
 #login_box{
-   /* text-align:center; */
+  /* text-align:center; */
   border-radius: 10px;
   padding:30px 50px;
   background: #fff;
@@ -75,7 +75,7 @@ body{ background-color: #ededed; }
   height:30px;
   padding-left:10px;
   background-color: #f4f4f4;
-   /* margin-left:10px; */
+  /* margin-left:10px; */
   border:none;
   border-radius: 5px;
 }
@@ -100,7 +100,7 @@ hr{
 
 .loginpath ul{
   width: 100%;
-  text-align: auto; /* 글자를 오른쪽으로 처리 */
+  text-align: right; /* 글자를 오른쪽으로 처리 */
   margin-bottom: 60px;
 }
 
@@ -132,39 +132,39 @@ hr{
 
 .modal_wrap{
   display: none;
-  width: 500px;        
-  height: 500px;        
-  position: absolute;        
-  top:50%;        
-  left: 50%;        
-  margin: -250px 0 0 -250px;        
-  background:#eee;        
-  z-index: 2;    
-}    
-  
-  .black_bg{        
-    display: none;        
-    position: absolute;        
-    content: "";        
-    width: 100%;        
-    height: 100%;        
-    background-color:rgba(0, 0,0, 0.5);        
-    top:0;        
-    left: 0;        
-    z-index: 1;    
-  }    
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  margin: -250px 0 0 -250px;
+  background:#eee;
+  z-index: 2;
+}
 
-  .modal_close{        
-    width: 26px;        
-    height: 26px;        
-    position: absolute;        
-    top: -30px;        
-    right: 0;    
-  }
+.black_bg{
+  display: none;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color:rgba(0, 0,0, 0.5);
+  top:0;
+  left: 0;
+  z-index: 1;
+}
 
-  .modal_close> a{        
-    display: block;        
-    width: 100%;        
-    height: 100%;        
-    background:url(https://img.icons8.com/metro/26/000000/close-window.png);        text-indent: -9999px;    
-  }
+.modal_close{
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  top: -30px;
+  right: 0;
+}
+
+.modal_close> a{
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:url(https://img.icons8.com/metro/26/000000/close-window.png);        text-indent: -9999px;
+}
