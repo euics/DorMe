@@ -1,0 +1,27 @@
+<nav class="navbar" th:fragment="navbarFragment" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div class="navbar_logo">
+        <a href="/"><img src="images/search.svg"></a>
+    </div>
+    <div class="navbar_title">
+        DorMe
+    </div>
+
+    <ul class="navbar_menu">
+        <li>
+            <a href=/boards>리뷰게시판</a>
+        </li>
+
+        <li>
+            <a href=/mypage>마이페이지</a>
+        </li>
+
+        <li>
+            <a href='#' target="_blank">문의하기</a>
+        </li>
+
+        <li>
+            <a href="#" sec:authorize="isAnonymous()" th:href="@{/members/login}">로그인</a>
+            <a href="#" sec:authorize="isAuthenticated()" th:href="@{/members/logout}">로그아웃</a>
+        </li>
+    </ul>
+</nav>
