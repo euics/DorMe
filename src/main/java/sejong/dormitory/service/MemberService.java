@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sejong.dormitory.constant.Role;
 import sejong.dormitory.dto.MemberFormDto;
 import sejong.dormitory.entity.Member;
 import sejong.dormitory.repository.MemberRepository;
@@ -35,6 +36,7 @@ public class MemberService implements UserDetailsService {
         return User.builder()
                 .username(member.getUsername())
                 .password(member.getPassword())
+                .roles(Role.USER.toString())
                 .build();
     }
 
