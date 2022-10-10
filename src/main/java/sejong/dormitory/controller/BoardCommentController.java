@@ -26,7 +26,7 @@ public class BoardCommentController {
     private final BoardService boardService;
     private final BoardCommentService boardCommentService;
 
-    @PostMapping("/boardContent/{id}")
+    @PostMapping("/viewPost/{id}")
     public String addBoardComment(@PathVariable("id") Long id,
                              @RequestParam String content,
                              Authentication authentication) {
@@ -37,19 +37,16 @@ public class BoardCommentController {
         Member member = memberService.findByUsername(username);
         Board board = boardService.findById(id);
 
-        String createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         BoardCommentDto boardCommentDto = BoardCommentDto.builder()
                 .content(content)
-                .dateTime(createDate)
-                .createdBy(member.getNickname())
                 .board(board)
                 .member(member)
                 .build();
 
         boardCommentService.saveBoardComment(boardCommentDto);
 
-        return "redirect:/board/boardContent/"+id;
+        return "redirect:/boards/viewPost/"+id;
     }
 
     /** 댓글 수정 GetMapping
@@ -111,7 +108,7 @@ public class BoardCommentController {
             throw new Exception("삭제 권한이 없습니다.");
         }
         boardCommentService.deleteBoardComment(boardCommentId);
-        return "redirect:/board/boardContent/" + id;
+        return "redirect:/boards/viewPost/" + id;
     }
 
 }

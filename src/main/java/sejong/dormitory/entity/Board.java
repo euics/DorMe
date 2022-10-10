@@ -13,7 +13,7 @@ import static javax.persistence.FetchType.LAZY;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
-public class Board {
+public class Board extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")
@@ -34,8 +34,6 @@ public class Board {
 
     private String title;
     private String content;
-    private String dateTime;
-    private String createdBy;
     private Long countVisit;
 
     public void addPhoto(Photo photo) {
@@ -49,12 +47,10 @@ public class Board {
 
 
     @Builder
-    public Board(String title, String content, String dateTime, String createdBy,
-                 Long countVisit, Member member, List<BoardComment> boardCommentList,List<Photo> photo) {
+    public Board(String title, String content, Long countVisit, Member member,
+                 List<BoardComment> boardCommentList,List<Photo> photo) {
         this.title = title;
         this.content = content;
-        this.dateTime = dateTime;
-        this.createdBy = createdBy;
         this.countVisit = countVisit;
         if (this.member != null) {
             member.getBoardList().remove(this);
@@ -67,22 +63,17 @@ public class Board {
         this.countVisit = countVisit;
     }
 
-    public void update(String title, String content, String dateTime,
-                       List<Photo> photo)
+    public void update(String title, String content, List<Photo> photo)
     {
         this.title = title;
         this.content = content;
-        this.dateTime = dateTime;
         this.photo = photo;
     }
 
-    public Board(Member member,String title, String content, String dateTime,
-                 String createdBy, Long countVisit) {
+    public Board(Member member,String title, String content, Long countVisit) {
         this.member = member;
         this.title = title;
         this.content = content;
-        this.dateTime = dateTime;
-        this.createdBy = createdBy;
         this.countVisit =countVisit;
     }
 

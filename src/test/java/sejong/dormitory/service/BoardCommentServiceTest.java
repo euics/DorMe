@@ -31,16 +31,10 @@ public class BoardCommentServiceTest {
         //given
         BoardCommentDto boardCommentDto1 = BoardCommentDto.builder()
                 .content("content")
-                .dateTime(LocalDateTime.now().
-                        format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
-                .createdBy("name")
                 .build();
 
         BoardCommentDto boardCommentDto2 = BoardCommentDto.builder()
                 .content("content2")
-                .dateTime(LocalDateTime.now().
-                        format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
-                .createdBy("name2")
                 .build();
 
         boardCommentService.saveBoardComment(boardCommentDto1);
@@ -52,9 +46,7 @@ public class BoardCommentServiceTest {
 
         //then
         assertThat(boardComment1.getContent()).isEqualTo("content");
-        assertThat(boardComment1.getCreatedBy()).isEqualTo("name");
         assertThat(boardComment2.getContent()).isEqualTo("content2");
-        assertThat(boardComment2.getCreatedBy()).isEqualTo("name2");
     }
 
     @Test
@@ -62,9 +54,6 @@ public class BoardCommentServiceTest {
         //given
         BoardCommentDto boardCommentDto = BoardCommentDto.builder()
                 .content("content")
-                .dateTime(LocalDateTime.now().
-                        format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
-                .createdBy("name")
                 .build();
 
         boardCommentService.saveBoardComment(boardCommentDto);

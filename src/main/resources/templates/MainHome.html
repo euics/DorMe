@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DorMe</title>
+
+  <script src="https://kit.fontawesome.com/a99efffa96.js" crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+  <link href="css/MainHome.css" rel="stylesheet" >
+  <link href="css/headers.css" rel="stylesheet">
+  <link rel="icon" href="images/favicon_img.png">
+  
+</head>
+<body>
+<nav th:replace="navbar :: navbarFragment"></nav>
+
+<main>
+<div class="bg_wrapper">
+<!-- 메인 -->
+  <header class="main_bg">
+      <!-- 소개 문구 -->
+      
+      <div class="main_bg_dark">
+        
+        <div class="main_bg_logo"></div>
+        
+        <div class="bg_big_text_slogan">
+          어떤 행복기숙사/학사관을 찾으시나요?
+        </div>
+        <div class="bg_text_btn_left">
+          <div class="bg_small_text fadein_text">
+            서울시 전체 행복기숙사/학사관 검색
+          </div>
+          <!-- <div class="bg_big_text fadein_text">
+              DorMi
+          </div> -->
+          <div class="bg_btn">
+              
+              <button class="bg_btn_style" onclick="location.href='/login/'">검색하기</button>
+              
+          </div>
+        </div>
+
+        <div class="bg_text_btn_right">
+          <div class="bg_small_text fadein_text">
+            내가 갈 수 있는 행복기숙사/학사관 검색
+          </div>
+          <div class="bg_btn">
+              <button class="bg_btn_style" onclick="location.href='/login/'">검색하기</button>
+          </div>
+        </div>
+
+      </div>
+      
+  </header>
+</div>
+</main>
+
+
+
+  <footer class="footer">
+    <ul class="footer_list">
+        <li>
+            - Contact -
+        </li>
+        <li>
+            Email : kimde9612@gmail.com
+        </li>
+        <li>
+            GitHub : <a href='https://github.com/euics/dormitory' style='color:lightgrey'
+                target='_blank'>https://github.com/euics/dormitory</a>
+        </li>
+    </ul>
+    <h2 class="copyright">Copyright
+        <i class="far fa-copyright"></i>
+        2022 DorMe. All Rights Reserved. <br>
+        김부교, 박종훈, 변은성, 이성빈
+    </h2>
+  </footer>
+</body>
+
+
+
+
+</html>

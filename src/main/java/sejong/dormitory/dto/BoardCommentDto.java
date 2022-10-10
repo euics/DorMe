@@ -9,18 +9,15 @@ import sejong.dormitory.entity.Member;
 
 @Getter
 @NoArgsConstructor
-public class BoardCommentDto {
+public class BoardCommentDto{
     private String content;
-    private String dateTime;
-    private String createdBy;
+
     private Board board;
     private Member member;
 
     @Builder
-    public BoardCommentDto(String content, String dateTime, String createdBy, Board board, Member member) {
+    public BoardCommentDto(String content, Board board, Member member) {
         this.content = content;
-        this.dateTime = dateTime;
-        this.createdBy = createdBy;
         if(this.board != null){
             board.getBoardCommentList().remove(this);
         }else
@@ -34,8 +31,6 @@ public class BoardCommentDto {
     public BoardComment toEntity() {
         return BoardComment.builder()
                 .content(content)
-                .dateTime(dateTime)
-                .createdBy(createdBy)
                 .member(member)
                 .board(board)
                 .build();

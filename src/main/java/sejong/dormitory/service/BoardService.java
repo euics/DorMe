@@ -9,15 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import sejong.dormitory.dto.BoardDto;
+import sejong.dormitory.dto.BoardResponseDto;
 import sejong.dormitory.entity.Board;
-import sejong.dormitory.entity.Member;
 import sejong.dormitory.entity.Photo;
 import sejong.dormitory.repository.BoardRepository;
 import sejong.dormitory.repository.MemberRepository;
 import sejong.dormitory.repository.PhotoRepository;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -25,7 +23,6 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
     private final PhotoRepository photoRepository;
-    private final MemberRepository memberRepository;
     private final FileHandler fileHandler;
 
     public Page<Board> paging(int page) {
@@ -33,15 +30,13 @@ public class BoardService {
     }
 
     @Transactional
-    public void createBoard(BoardDto boardDto,
+    public void createPost(BoardDto boardDto,
                             List<MultipartFile> files) throws Exception {
         // 파일 처리를 위한 Board 객체 생성
         Board board = new Board(
                 boardDto.getMember(),
                 boardDto.getTitle(),
                 boardDto.getContent(),
-                boardDto.getDateTime(),
-                boardDto.getCreatedBy(),
                 boardDto.getCountVisit()
         );
 
@@ -50,11 +45,17 @@ public class BoardService {
         if(!photoList.isEmpty()) {
             for(Photo photo : photoList) {
                 // 파일을 DB에 저장
-                System.out.println("save compl");
                 board.addPhoto(photoRepository.save(photo));
             }
         }
         boardRepository.save(board);
+    }
+    @Transactional(readOnly = true)
+    public BoardResponseDto searchById(Long id, List<Long> fileId){
+        Board entity = boardRepository.findById(id).orElseThrow(()
+                -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
+
+        return new BoardResponseDto(entity, fileId);
     }
 
     @Transactional
@@ -71,8 +72,7 @@ public class BoardService {
             }
         }
 
-        String created_date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        board.update(boardDto.getTitle(),boardDto.getContent(),created_date,photoList);
+        board.update(boardDto.getTitle(),boardDto.getContent(),photoList);
     }
 
     @Transactional
@@ -96,5 +96,6 @@ public class BoardService {
     public Board findById(Long id){
         return boardRepository.findById(id).get();
     }
+
 
 }

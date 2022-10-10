@@ -9,8 +9,6 @@ import sejong.dormitory.dto.BoardDto;
 import sejong.dormitory.entity.Board;
 import sejong.dormitory.repository.BoardRepository;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,13 +34,11 @@ public class BoardServiceTest {
         BoardDto boardDto = BoardDto.builder()
                 .title("title")
                 .content("content")
-                .createdBy("nickName")
                 .countVisit(1L)
-                .dateTime("2022-09-25")
                 .build();
 
         List<MultipartFile> files = new ArrayList<>();
-        boardService.createBoard(boardDto,files);
+        boardService.createPost(boardDto,files);
 
         //when
         Board board = boardService.findById(1L);
@@ -52,7 +48,6 @@ public class BoardServiceTest {
         assertThat(board.getContent()).isEqualTo("content");
         assertThat(board.getCreatedBy()).isEqualTo("nickName");
         assertThat(board.getCountVisit()).isEqualTo(1L);
-        assertThat(board.getDateTime()).isEqualTo("2022-09-25");
     }
 
     @Test
@@ -61,13 +56,11 @@ public class BoardServiceTest {
         BoardDto boardDto = BoardDto.builder()
                 .title("title")
                 .content("content")
-                .createdBy("nickName")
                 .countVisit(1L)
-                .dateTime("2022-09-25")
                 .build();
 
         List<MultipartFile> files = new ArrayList<>();
-        boardService.createBoard(boardDto,files);
+        boardService.createPost(boardDto,files);
 
         //when
         BoardDto boardDto1 = BoardDto.builder()
@@ -84,8 +77,6 @@ public class BoardServiceTest {
         assertThat(board.getContent()).isEqualTo("content2");
         assertThat(board.getCreatedBy()).isEqualTo("nickName");
         assertThat(board.getCountVisit()).isEqualTo(1L);
-        assertThat(board.getDateTime()).isEqualTo(LocalDateTime.now().
-                format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
     }
 
@@ -95,13 +86,11 @@ public class BoardServiceTest {
         BoardDto boardDto = BoardDto.builder()
                 .title("title")
                 .content("content")
-                .createdBy("nickName")
                 .countVisit(1L)
-                .dateTime("2022-09-25")
                 .build();
 
         List<MultipartFile> files = new ArrayList<>();
-        boardService.createBoard(boardDto,files);
+        boardService.createPost(boardDto,files);
 
         //when
 

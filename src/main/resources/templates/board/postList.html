@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>리뷰게시판</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="/css/MainHome.css" rel="stylesheet" >
+  <link href="/css/postList.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<nav th:replace="navbar :: navbarFragment"></nav>
+
+<div class="container-lg">
+  <div class="table-responsive">
+    <form class="form-inline d-flex justify-content-end" method="GET", th:action="@{/boards}" th:value="${param.searchText}">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-6">
+              <h2>게시판</h2>
+            </div>
+            <div class="col-sm-6">
+              <div class="search-box">
+                <div class="input-group">
+                  <input type="text" id="search" class="form-control" placeholder="Search by Title">
+                  <button type="submit" class="btn btn-light mb-2"><i class="material-icons">&#xE8B6;</i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th style="width: 45%;">제목</th>
+            <th>작성자</th>
+            <th>날짜</th>
+            <th>조회수</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="board : ${boards}">
+            <td th:text="${board.id}"></td>
+            <td><a th:href="@{'/boards/viewPost/' + ${board.id}}"><span th:text="${board.title}"></span></a></td>
+            <td><a th:href="@{'/boards/viewPost/' + ${board.id}}"><span th:text="${board.createdBy}"></span></a></td>
+            <td th:text="${board.regTime}"></td>
+            <td th:text="${board.countVisit}"></td>
+            <td>
+              <a th:href="@{'/boards/editPost/' + ${board.id}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+              <a th:href="@{'/boards/postDelete/' + ${board.id}}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${1 == boards.pageable.pageNumber + 1} ? 'disabled'">
+              <a class="page-link" href="#"
+                 th:href="@{/boards(page=${boards.pageable.pageNumber - 1},searchText=${param.searchText})}"
+                 tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item" th:classappend="${i == boards.pageable.pageNumber + 1} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}">
+              <a class="page-link" href="#" th:href="@{/boards(page=${i - 1},searchText=${param.searchText})}" th:text="${i}"></a>
+            </li>
+            <li class="page-item" th:classappend="${boards.totalPages == boards.pageable.pageNumber + 1} ? 'disabled'">
+              <a class="page-link" href="#" th:href="@{/boards(page=${boards.pageable.pageNumber + 1},searchText=${param.searchText})}">Next</a>
+            </li>
+          </ul>
+        </nav>
+
+
+        <button type="button" class="btn btn-info pull-right" onclick="location.href='/boards/createForm'">글쓰기</button>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+</body>
+
+<script src="js/postList.js"></script>
+</html>

@@ -18,8 +18,6 @@ import sejong.dormitory.service.BoardCommentService;
 import sejong.dormitory.service.BoardService;
 import sejong.dormitory.service.MemberService;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -31,41 +29,33 @@ public class BoardController {
     private final BoardService boardService;
     private final BoardCommentService boardCommentService;
 
-    @GetMapping("/")
-    public String viewBoardList(Model model, @PageableDefault(size = 10) Pageable pageable,
-                            @RequestParam(required = false, defaultValue = "") String searchText,
-                            Authentication authentication) {
+    @GetMapping("")
+    public String viewPostList(Model model, @PageableDefault(size = 10) Pageable pageable,
+                            @RequestParam(required = false, defaultValue = "") String searchText) {
 
-        try {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Page<Board> boards = boardService.searchByTitleOrContent(searchText,searchText,pageable);
 
-            Page<Board> boards = boardService.searchByTitleOrContent(searchText,searchText,pageable);
+        int startPage = Math.max(1, boards.getPageable().getPageNumber() - 4);
+        int endPage = Math.min(boards.getPageable().getPageNumber()+4, boards.getTotalPages());
 
-            //검색기능
-            int startPage = Math.max(1, boards.getPageable().getPageNumber() - 1);
-            int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() + 3);
-
-            model.addAttribute("boards", boards);
-            model.addAttribute("startPage", startPage);
-            model.addAttribute("endPage", endPage);
-        } catch (Exception e){
-            return "login/login";
-        }
-        return "board/boardList";
+        model.addAttribute("boards", boards);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        return "board/postList";
     }
 
-    @GetMapping("/boardForm")
-    public String viewBoardForm(Authentication authentication) {
+    @GetMapping("/createForm")
+    public String viewPostForm(Authentication authentication) {
         try {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         } catch (Exception e){
-            return "login/login";
+            return "redirect:/members/login";
         }
-        return "board/boardForm";
+        return "board/postCreateForm";
     }
 
-    @PostMapping("/boardForm")
-    public String createBoard(@RequestParam(value="file", required=false) List<MultipartFile> files,
+    @PostMapping("/createForm")
+    public String createPost(@RequestParam(value="file", required=false) List<MultipartFile> files,
                               @RequestParam(value="title") String title,
                               @RequestParam(value="content") String content,
                               Authentication authentication)throws Exception{
@@ -75,28 +65,25 @@ public class BoardController {
 
         Member member = memberService.findByUsername(username);
 
-        String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         BoardDto boardDto =
                 BoardDto.builder()
                         .member(member)
                         .title(title)
                         .content(content)
-                        .dateTime(dateTime)
-                        .createdBy(member.getNickname())
                         .countVisit(1L)
                         .build();
-        boardService.createBoard(boardDto, files);
+        boardService.createPost(boardDto, files);
         return "redirect:/boards/";
     }
 
-    @GetMapping("/boardContent/{id}")
-    public String viewBoardContent(@PathVariable("id") Long id, Model model) {
+    @GetMapping("/veiwPost/{id}")
+    public String viewPost(@PathVariable("id") Long id, Model model) {
         Board board = boardService.findById(id);
 
         Long countVisit = board.getCountVisit()+1L;
         boardService.updateCountVisit(board, countVisit);
-        // System.out.println("= " + board.getCountVisit());
+
 
         board.updateVisit(countVisit);
         List<BoardComment> comments = boardCommentService.findBoardCommentsByBoardId(id);
@@ -104,7 +91,7 @@ public class BoardController {
         model.addAttribute("comments", comments);
         model.addAttribute(board);
 
-        return "board/boardContent";
+        return "board/viewPost";
     }
 
     @GetMapping("/editPost/{id}")
@@ -114,7 +101,7 @@ public class BoardController {
         try {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         } catch (Exception e){
-            return "login/login";
+            return "redirect:/members/login";
         }
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -126,7 +113,7 @@ public class BoardController {
             throw new Exception("수정 권한이 없습니다.");
 
         boardService.deletePost(id);
-        return "board/boardForm";
+        return "board/postCreateForm";
     }
 
     @PostMapping("/editPost/{id}")
