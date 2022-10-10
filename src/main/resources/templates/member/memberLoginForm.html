@@ -24,16 +24,16 @@
                 <h3 class="login" style="letter-spacing:-1px;">Login to Web</h3>
                 <hr>
                 <!-- <span>ID</span> -->
-                <label>
+                <label th:for="username">
                     <p style="text-align: left; font-size:12px">ID</p>
-                    <input type="text" placeholder="아이디" class="size">
+                    <input type="text" name="username" placeholder="아이디" class="size">
                     <p></p>
                 </label><!--아이디-->
 
-                <label>
+                <label th:for="password">
                     <!-- <span>PW</span> -->
                     <p style="text-align: left; font-size:12px">Password </p>
-                    <input type="password" placeholder="비밀번호" class="size">
+                    <input type="password" name="password" placeholder="비밀번호" class="size">
                 </label><!--비밀번호-->
                 <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
                 <br>
