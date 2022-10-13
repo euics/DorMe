@@ -26,7 +26,7 @@ public class BoardCommentController {
     private final BoardService boardService;
     private final BoardCommentService boardCommentService;
 
-    @PostMapping("/viewPost/{id}")
+    @PostMapping("/post/{id}")
     public String addBoardComment(@PathVariable("id") Long id,
                              @RequestParam String content,
                              Authentication authentication) {
@@ -46,7 +46,7 @@ public class BoardCommentController {
 
         boardCommentService.saveBoardComment(boardCommentDto);
 
-        return "redirect:/boards/viewPost/"+id;
+        return "redirect:/boards/post/"+id;
     }
 
     /** 댓글 수정 GetMapping
@@ -92,7 +92,7 @@ public class BoardCommentController {
 
     @GetMapping("/deleteBoardComment/{id}")
     public String deleteBoardComment(@PathVariable("id") Long id,
-                                     @RequestParam Long boardCommentId,
+                                     @RequestParam(value = "commentId") Long boardCommentId,
                                      Authentication authentication
     ) throws Exception{
 
@@ -104,11 +104,11 @@ public class BoardCommentController {
         if(boardComment.equals(null)){
             throw new Exception("댓글이 존재하지 않습니다.");
         }
-        if(!member.getNickname().equals(boardComment.getCreatedBy())){
+        if(!member.getUsername().equals(boardComment.getCreatedBy())){
             throw new Exception("삭제 권한이 없습니다.");
         }
         boardCommentService.deleteBoardComment(boardCommentId);
-        return "redirect:/boards/viewPost/" + id;
+        return "redirect:/boards/post/" + id;
     }
 
 }
