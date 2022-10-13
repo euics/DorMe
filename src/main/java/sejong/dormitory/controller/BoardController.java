@@ -33,7 +33,7 @@ public class BoardController {
     public String viewPostList(Model model, @PageableDefault(size = 10) Pageable pageable,
                             @RequestParam(required = false, defaultValue = "") String searchText) {
 
-        Page<Board> boards = boardService.searchByTitleOrContent(searchText,searchText,pageable);
+        Page<Board> boards = boardService.findByTitleContainingOrContentContaining(searchText,searchText,pageable);
 
         int startPage = Math.max(1, boards.getPageable().getPageNumber() - 4);
         int endPage = Math.min(boards.getPageable().getPageNumber()+4, boards.getTotalPages());
@@ -74,10 +74,10 @@ public class BoardController {
                         .countVisit(1L)
                         .build();
         boardService.createPost(boardDto, files);
-        return "redirect:/boards/";
+        return "redirect:/boards";
     }
 
-    @GetMapping("/veiwPost/{id}")
+    @GetMapping("/post/{id}")
     public String viewPost(@PathVariable("id") Long id, Model model) {
         Board board = boardService.findById(id);
 
@@ -109,7 +109,7 @@ public class BoardController {
         Member member = memberService.findByUsername(username);
         Board board = boardService.findById(id);
 
-        if(!board.getCreatedBy().equals(member.getNickname()))
+        if(!board.getCreatedBy().equals(member.getUsername()))
             throw new Exception("수정 권한이 없습니다.");
 
         boardService.deletePost(id);
@@ -143,7 +143,7 @@ public class BoardController {
         Member member = memberService.findByUsername(username);
         Board board = boardService.findById(id);
 
-        if(!board.getCreatedBy().equals(member.getNickname()))
+        if(!board.getCreatedBy().equals(member.getUsername()))
             throw new Exception("삭제 권한이 없습니다.");
         boardService.deletePost(id);
         return "redirect:/boards/";

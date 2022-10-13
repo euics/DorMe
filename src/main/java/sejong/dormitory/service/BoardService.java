@@ -13,7 +13,6 @@ import sejong.dormitory.dto.BoardResponseDto;
 import sejong.dormitory.entity.Board;
 import sejong.dormitory.entity.Photo;
 import sejong.dormitory.repository.BoardRepository;
-import sejong.dormitory.repository.MemberRepository;
 import sejong.dormitory.repository.PhotoRepository;
 
 import java.util.List;
@@ -89,8 +88,9 @@ public class BoardService {
         board.setCountVisit(countVisit);
     }
 
-    public Page<Board> searchByTitleOrContent(String searchText1, String searchText2, Pageable pageable){
-        return boardRepository.searchByTitleOrContent(searchText1, searchText2, pageable);
+    @Transactional
+    public Page<Board> findByTitleContainingOrContentContaining(String searchText1, String searchText2, Pageable pageable){
+        return boardRepository.findByTitleContainingOrContentContaining(searchText1, searchText2, pageable);
     }
 
     public Board findById(Long id){
