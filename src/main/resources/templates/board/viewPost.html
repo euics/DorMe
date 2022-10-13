@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
-    <link href="css/MainHome.css" rel="stylesheet" >
+    <link href="/css/MainHome.css" rel="stylesheet" >
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
     <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -61,16 +61,16 @@
         <tr th:each="comment : ${comments}">
             <td th:text="${comment.createdBy}"></td>
             <td th:text="${comment.content}"></td>
-            <td th:text="${comment.regTime}"></td>
+            <td th:text="${#temporals.format(comment.regTime,'yyyy-MM-dd')}"></td>
             <td>
-                <a th:href="@{'/board/editBoardComment/' + ${board.id} +'?'+ 'commentId='+ ${comment.getId()}}" class="edit" title="Edit" data-toggle="tooltip" onclick="window.location.reload()"><i class="material-icons">&#xE254;</i></a>
-                <a th:href="@{'/board/deleteBoardComment/' + ${board.id} +'?'+ 'commentId=' + ${comment.getId()}}" class="delete" title="Delete" data-toggle="tooltip" onclick="window.location.reload()"><i class="material-icons">&#xE872;</i></a>
+                <a th:href="@{'/boards/editBoardComment/' + ${board.id} +'?'+ 'commentId='+ ${comment.getId()}}" class="edit" title="Edit" data-toggle="tooltip" onclick="window.location.reload()"><i class="material-icons">&#xE254;</i></a>
+                <a th:href="@{'/boards/deleteBoardComment/' + ${board.id} +'?'+ 'commentId=' + ${comment.getId()}}" class="delete" title="Delete" data-toggle="tooltip" onclick="window.location.reload()"><i class="material-icons">&#xE872;</i></a>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <form action="viewPost.html" th:action="@{'/boards/veiwPost/'+${board.getId()}}" method="post">
+    <form action="viewPost.html" th:action="@{'/boards/post/'+${board.getId()}}" method="post">
         <div class="card mb-2 mt-5">
             <div class="card-header bg-light">
                 <i class="fa fa-comment fa"></i> 댓글
@@ -78,7 +78,7 @@
             <div class="card-body">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="content" rows="1"></textarea>
                         <button type="submit" class="btn btn-info mt-3">등록</button>
                     </li>
                 </ul>
