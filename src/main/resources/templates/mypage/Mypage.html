@@ -78,61 +78,10 @@
               <button th:href="@{'mypage/unRegister'}" id='b6' class="my_box_mod_btn">탈퇴하기</button>
           </div>
         </div>
-
-
-        <!-- 기술구현부분 -->
-        <div class="my_box_grade">
-          <div style="padding:2.5rem 2.5rem 0 2.5rem">
-              <div class="my_box_title">
-                  <div></div>
-                  <div>여러 조건으로 검색해보세요!</div>
-                  <div></div>
-              </div>
-              <hr style="margin-top:2.5rem;">
-
-
-              <section class="section">
-                <div class="about">
-                  <div class="about__card">
-                    <img class="about__icon" src="../img/about_1_dollar.svg" alt="">
-                    <h2 class="about__title _1">
-                      가격
-                    </h2>
-                    <p class="about__text">
-                      가격이 착한 곳을 <br>
-                      찾으시나요?
-                    </p>
-                  </div>
-                  <div class="about__card">
-                    <img class="about__icon" src="../img/about_2_map.svg" alt="">
-                    <h2 class="about__title _2">
-                      거리
-                    </h2>
-                    <p class="about__text">
-                      학교와 가까운 곳을 <br>
-                      찾으시나요?
-                    </p>
-                  </div>
-                  <div class="about__card">
-                    <img class="about__icon" src="../img/about_3_facility.svg" alt="">
-                    <h2 class="about__title _3">
-                      시설
-                    </h2>
-                    <p class="about__text">
-                      다양한 시설이 있는 곳을 <br>
-                      찾으시나요?
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-              
-          </div>
-        </div>
     </div>
   </div>
 
-
+<div th:replace="footer :: footerFragment"></div>
 
 
 
@@ -164,31 +113,6 @@
 </div>
 
 
-
-
-
-
-
-
-  <footer class="footer">
-    <ul class="footer_list">
-        <li>
-            - Contact -
-        </li>
-        <li>
-            Email : kimde9612@gmail.com
-        </li>
-        <li>
-            GitHub : <a href='https://github.com/euics/dormitory' style='color:lightgrey'
-                target='_blank'>https://github.com/euics/dormitory</a>
-        </li>
-    </ul>
-    <h2 class="copyright">Copyright
-        <i class="far fa-copyright"></i>
-        2022 DorMe. All Rights Reserved. <br>
-        김부교, 박종훈, 변은성, 이성빈
-    </h2>
-  </footer>
 </body>
 
 

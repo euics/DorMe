@@ -27,63 +27,78 @@
       <div class="main_bg_dark">
         
         <div class="main_bg_logo"></div>
-        
-        <div class="bg_big_text_slogan">
-          어떤 행복기숙사/학사관을 찾으시나요?
-        </div>
-        <div class="bg_text_btn_left">
-          <div class="bg_small_text fadein_text">
-            서울시 전체 행복기숙사/학사관 검색
-          </div>
-          <!-- <div class="bg_big_text fadein_text">
-              DorMi
-          </div> -->
-          <div class="bg_btn">
-              
-              <button class="bg_btn_style" onclick="location.href='/login/'">검색하기</button>
-              
-          </div>
-        </div>
 
-        <div class="bg_text_btn_right">
-          <div class="bg_small_text fadein_text">
-            내가 갈 수 있는 행복기숙사/학사관 검색
+          <div class="bg_big_text_slogan">
+              어떤 행복기숙사/학사관을 찾으시나요?
           </div>
-          <div class="bg_btn">
-              <button class="bg_btn_style" onclick="location.href='/login/'">검색하기</button>
+          <div class="bg_about">
+              <section class="section">
+                  <div class="about">
+                      <div class="about__card">
+                          <img class="about__icon" src="/images/about_1_dollar.svg" alt="">
+                          <h2 class="about__title _1">
+                              가격
+                          </h2>
+                          <p class="about__text">
+                              가격이 착한 곳을 <br>
+                              찾으시나요?
+                          </p>
+                      </div>
+                      <div class="about__card">
+                          <img class="about__icon" src="/images/about_2_map.svg" alt="">
+                          <h2 class="about__title _2">
+                              거리
+                          </h2>
+                          <p class="about__text">
+                              학교와 가까운 곳을 <br>
+                              찾으시나요?
+                          </p>
+                      </div>
+                      <div class="about__card">
+                          <img class="about__icon" src="/images/about_3_facility.svg" alt="">
+                          <h2 class="about__title _3">
+                              시설
+                          </h2>
+                          <p class="about__text">
+                              다양한 시설이 있는 곳을 <br>
+                              찾으시나요?
+                          </p>
+                      </div>
+                  </div>
+              </section>
           </div>
-        </div>
+          <div class="bg_text_btn">
+              <div class="bg_text_btn_lr">
+                  <div class="bg_text_btn_left">
+                  <div class="bg_small_text fadein_text">
+                      서울시 전체 행복기숙사/학사관 검색
+                  </div>
+                  <div class="bg_btn">
 
+                      <button class="bg_btn_style" onclick="location.href='/login/'">검색하기</button>
+
+                  </div>
+              </div>
+
+              <div class="bg_text_btn_right">
+                  <div class="bg_small_text fadein_text">
+                      내가 갈 수 있는 행복기숙사/학사관 검색
+                  </div>
+                  <div class="bg_btn">
+
+                      <button class="bg_btn_style" onclick="location.href='/login/'">검색하기</button>
+
+                  </div>
+              </div>
+          </div>
       </div>
-      
+      </div>
   </header>
 </div>
 </main>
 
 
-
-  <footer class="footer">
-    <ul class="footer_list">
-        <li>
-            - Contact -
-        </li>
-        <li>
-            Email : kimde9612@gmail.com
-        </li>
-        <li>
-            GitHub : <a href='https://github.com/euics/dormitory' style='color:lightgrey'
-                target='_blank'>https://github.com/euics/dormitory</a>
-        </li>
-    </ul>
-    <h2 class="copyright">Copyright
-        <i class="far fa-copyright"></i>
-        2022 DorMe. All Rights Reserved. <br>
-        김부교, 박종훈, 변은성, 이성빈
-    </h2>
-  </footer>
+<div th:replace="footer :: footerFragment"></div>
 </body>
-
-
-
 
 </html>
