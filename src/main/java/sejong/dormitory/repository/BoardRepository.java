@@ -7,5 +7,5 @@ import sejong.dormitory.entity.Board;
 import sejong.dormitory.entity.Member;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
-    Page<Board> searchByTitleOrContent(String title, String content, Pageable pageable);
+    Page<Board> findByTitleContainingOrContentContaining(String title, String content, Pageable pageable);
 }
