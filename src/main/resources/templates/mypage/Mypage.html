@@ -15,34 +15,7 @@
 
 </head>
 <body>
-
-<nav class="navbar">
-    <div class="navbar_logo">
-        <a href="/"><img src="/images/search.svg"></a>
-    </div>
-    <div class="navbar_title">
-        DorMe
-    </div>
-
-    <ul class="navbar_menu">
-        <li>
-            <a href=#>리뷰게시판</a>
-        </li>
-
-        <li>
-            <a href='#' target="_blank">문의하기</a>
-        </li>
-
-        <li>
-            <a href=#>마이페이지</a>
-        </li>
-
-        <li>
-            <!-- 로그인 세션 활용 -->
-            <a href='/login/'>로그아웃</a>
-        </li>
-    </ul>
-</nav>
+<nav th:replace="navbar :: navbarFragment"></nav>
 
 <div class="gray_sec">
     <div class="container">
