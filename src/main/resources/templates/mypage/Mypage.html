@@ -1,87 +1,125 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DorMe</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DorMe</title>
 
-  <script src="https://kit.fontawesome.com/a99efffa96.js" crossorigin="anonymous"></script>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
-  <link href="/css/Mypage.css" rel="stylesheet">
-  <link rel="icon" href="/images/favicon_img.png">
+    <script src="https://kit.fontawesome.com/a99efffa96.js" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+    <link href="/css/Mypage.css" rel="stylesheet">
+    <link rel="icon" href="/images/favicon_img.png">
 
 </head>
 <body>
-<nav th:replace="navbar :: navbarFragment"></nav>
 
-  <div class="gray_sec">
+<nav class="navbar">
+    <div class="navbar_logo">
+        <a href="/"><img src="/images/search.svg"></a>
+    </div>
+    <div class="navbar_title">
+        DorMe
+    </div>
+
+    <ul class="navbar_menu">
+        <li>
+            <a href=#>리뷰게시판</a>
+        </li>
+
+        <li>
+            <a href='#' target="_blank">문의하기</a>
+        </li>
+
+        <li>
+            <a href=#>마이페이지</a>
+        </li>
+
+        <li>
+            <!-- 로그인 세션 활용 -->
+            <a href='/login/'>로그아웃</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="gray_sec">
     <div class="container">
         <div style="font-size:4rem;">
-          <i class="fa-solid fa-building"></i>
+            <i class="fa-solid fa-building"></i>
         </div>
         <div class="big_title">마이페이지</div>
     </div>
-  </div>
+</div>
 
 
-  <div class="white_sec">
+<div class="white_sec">
     <div class="my_box_wrap">
         <div class="my_box">
-          <!-- 내 정보 박스 -->
-          <div class="my_box_title">
-              <div><i class="fas fa-user"></i>내 정보</div>
-              <button id='b1' class="my_box_mod_btn">업데이트</button>
-          </div>
-          <hr>
-          <table>
-              <tr>
-                  <td class="my_box_table_1st_td">아이디</td>
-                  <td th:text="${member.getUsername()}"></td>
-              </tr>
-              <tr>
-                  <td class="my_box_table_1st_td">별명</td>
-                  <td th:text="${member.getNickname()}"></td>
-              </tr>
-              <tr>
-                  <td class="my_box_table_1st_td">지역</td>
-                  <td th:text="${member.getLocal()}"></td>
-              </tr>
-              <tr>
-                  <td class="my_box_table_1st_td">대학교</td>
-                  <td th:text="${member.getSchool()}">
-                      
-                          세종대학교
-                      
-                  </td>
-              </tr>
-          </table>
+            <!-- 내 정보 박스 -->
+            <div class="my_box_title">
+                <div><i class="fas fa-user"></i>내 정보</div>
+                <button id='b1' class="my_box_mod_btn">업데이트</button>
+            </div>
+            <hr>
+            <table>
+                <tr>
+                    <td class="my_box_table_1st_td">이름</td>
+                    <td>김부교</td>
+                </tr>
+                <tr>
+                    <td class="my_box_table_1st_td">별명</td>
+                    <td>박부교(최대 12자로)</td>
+                </tr>
+                <tr>
+                    <td class="my_box_table_1st_td">지역</td>
+                    <td>서울</td>
+                </tr>
+                <tr>
+                    <td class="my_box_table_1st_td">대학교</td>
+                    <td>
+
+                        세종대학교
+
+                    </td>
+                </tr>
+            </table>
         </div>
 
 
-        <!-- 비번 / 영어 수정 / 회원 탈퇴 -->
+        <!-- 게시글 보기 / 비번 / 회원 탈퇴 -->
         <div class="my_box">
-          <div class="my_box_title">
-              <div><i class="fas fa-user-edit"></i>내가 쓴 게시물</div>
-              <button id='b2' class="my_box_mod_btn">보러가기</button>
-          </div>
-          <hr style="margin-bottom:2.5rem; margin-top:2.5rem;">
-          <div class="my_box_title">
-              <div><i class="fas fa-key"></i>비밀번호 변경</div>
-              <button id='b3' class="my_box_mod_btn">변경하기</button>
-          </div>
-          <hr style="margin-bottom:2.5rem; margin-top:2.5rem;">
-          <div class="my_box_title">
-              <div><i class="fas fa-exclamation-triangle"></i>회원 탈퇴</div>
-              <button th:href="@{'mypage/unRegister'}" id='b6' class="my_box_mod_btn">탈퇴하기</button>
-          </div>
+            <div class="my_box_title">
+                <div><i class="fas fa-user-edit"></i>내가 쓴 게시물</div>
+                <button id='b2' class="my_box_mod_btn">보러가기</button>
+            </div>
+            <!-- <hr style="margin-bottom:0.8rem;">
+            <table>
+                <tr>
+                    <td class="my_box_table_1st_td">전공상태</td>
+                    <td>해당없음</td>
+                </tr>
+                <tr>
+                    <td class="my_box_table_1st_td">영어인증</td>
+                    <td>해당없음</td>
+                </tr>
+            </table> -->
+            <hr style="margin-bottom:2.5rem; margin-top:2.5rem;">
+            <div class="my_box_title">
+                <div><i class="fas fa-key"></i>비밀번호 변경</div>
+                <button id='b3' class="my_box_mod_btn">변경하기</button>
+            </div>
+            <hr style="margin-bottom:2.5rem; margin-top:2.5rem;">
+            <div class="my_box_title">
+                <div><i class="fas fa-exclamation-triangle"></i>회원 탈퇴</div>
+                <button id='b4' class="my_box_mod_btn">탈퇴하기</button>
+            </div>
         </div>
 
 
         <!-- 기술구현부분 -->
-        <div class="my_box_grade">
+        <!-- <div class="my_box_grade">
           <div style="padding:2.5rem 2.5rem 0 2.5rem">
               <div class="my_box_title">
                   <div></div>
@@ -89,12 +127,10 @@
                   <div></div>
               </div>
               <hr style="margin-top:2.5rem;">
-
-
               <section class="section">
                 <div class="about">
                   <div class="about__card">
-                    <img class="about__icon" src="/images/about_1_dollar.svg" alt="">
+                    <img class="about__icon" src="../img/about_1_dollar.svg" alt="">
                     <h2 class="about__title _1">
                       가격
                     </h2>
@@ -104,7 +140,7 @@
                     </p>
                   </div>
                   <div class="about__card">
-                    <img class="about__icon" src="/images/about_2_map.svg" alt="">
+                    <img class="about__icon" src="../img/about_2_map.svg" alt="">
                     <h2 class="about__title _2">
                       거리
                     </h2>
@@ -114,7 +150,7 @@
                     </p>
                   </div>
                   <div class="about__card">
-                    <img class="about__icon" src="/images/about_3_facility.svg" alt="">
+                    <img class="about__icon" src="../img/about_3_facility.svg" alt="">
                     <h2 class="about__title _3">
                       시설
                     </h2>
@@ -126,57 +162,132 @@
                 </div>
               </section>
 
-              
           </div>
-        </div>
+        </div> -->
     </div>
-  </div>
-
-
-
-
-
-
-
-
-
-
+</div>
 
 
 <!-- 1. 내정보 업데이트 모달 -->
 <div id='m1' class="modal">
-  <div class="update_modal_content">
-      <div id='c1' class="close">&times;</div>
-      <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
-          내 정보 업데이트
-      </div>
-      <div style="margin-top:0.5rem; font-size:0.9rem; color:rgb(199, 199, 199)">
-          대양휴머니티칼리지에 로그인하여 이름,학과,고전독서현황을 업데이트합니다. (세종대학교 포털 ID/PW와 동일)
-      </div>
-      <hr style="width:80%; margin-top:1.3rem;">
-      <!-- 폼 -->
-      <form action="/f_mod_info/" method="post" name='form1' onsubmit="return check_up1()">
-          <input type="hidden" name="csrfmiddlewaretoken" value="gSYKcfoJRVb244YMREduqVhPZ2MsEhaKN55LE2l7qCOwb1pAINaEVUwrXy0ofVzY">
-          <div class="regi_box">
-              <label style="text-align: center;">아이디</label>
-              <input type="text" name="student_id" placeholder='18011873'
-                  style="background-color:rgb(248,249,250);" disabled>
-              <label style="text-align: center;">비밀번호</label>
-              <input type="password" id="pw" name="pw" placeholder="PASSWORD">
-          </div>
-          <input type='submit' class='login_btn' value='로그인' style="margin:2.5rem 0 2rem 0;">
-      </form>
-  </div>
+    <div class="update_modal_content">
+        <div id='c1' class="close">&times;</div>
+        <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
+            내 정보 업데이트
+        </div>
+        <hr style="width:80%; margin-top:1.3rem;">
+        <!-- 폼 -->
+        <form action="/f_mod_info/" method="post" name='form1' onsubmit="return check_up1()">
+            <input type="hidden" name="csrfmiddlewaretoken" value="gSYKcfoJRVb244YMREduqVhPZ2MsEhaKN55LE2l7qCOwb1pAINaEVUwrXy0ofVzY">
+            <div class="regi_box">
+                <label style="text-align: center;">아이디</label>
+                <input type="text" name="student_id" placeholder='kimbk98(아이디는 못바꾸게)'
+                       style="background-color:rgb(248,249,250);" disabled>
+                <!-- <label style="text-align: center;">비밀번호</label>
+                <input type="password" id="pw" name="pw" placeholder="PASSWORD"> -->
+                <label style="text-align: center;">별명</label>
+                <input type="text" name="nickname" placeholder="NICKNAME">
+                <label style="text-align: center;">지역</label>
+                <label style="text-align: center; margin-top:16px;">
+                    <input id="modal_local" type="radio" name="local" value='Seoul'/>서울
+                    <input id="modal_local" type='radio' name="local" value='Gyeonggi'/> 경기
+                    <input id="modal_local" type='radio' name="local" value='Gangwon'/> 강원
+                    <input id="modal_local" type='radio' name="local" value='Chungbuk'/> 충북
+                    <input id="modal_local" type='radio' name="local" value='Chungnam'/> 충남<br>
+                    <input id="modal_local" type='radio' name="local" value='Gyeongbuk'/> 경북
+                    <input id="modal_local" type='radio' name="local" value='Gyeongnam'/> 경남
+                    <input id="modal_local" type='radio' name="local" value='Jeonbuk'/> 전북
+                    <input id="modal_local" type='radio' name="local" value='Jeonnam'/> 전남
+                    <input id="modal_local" type='radio' name="local" value='Jeju'/> 제주
+                </label>
+                <label style="text-align: center;">대학교</label>
+                <select class="selectbox">
+                    <option name="university" value='Snu'>서울대학교</option>
+                    <option name="university" value='KonKuK'>건국대학교</option>
+                    <option name="university" value='Kyonggi'>경기대학교</option>
+                    <option name="university" value='Khu'>경희대학교</option>
+                    <option name="university" value='Korea'>고려대학교</option>
+                    <option name="university" value='Kw'>광운대학교</option>
+                    <option name="university" value='Kookmin'>국민대학교</option>
+                    <option name="university" value='Dongguk'>동국대학교</option>
+                    <option name="university" value='Mju'>명지대학교</option>
+                    <option name="university" value='Sogang'>서강대학교</option>
+                    <option name="university" value='Sejong'>세종대학교</option>
+                    <option name="university" value='Ssu'>숭실대학교</option>
+                    <option name="university" value='Yonsei'>연세대학교</option>
+                    <option name="university" value='Cau'>중앙대학교</option>
+                    <option name="university" value='Hanyang'>한양대학교</option>
+                    <option name="university" value='Hongik'>홍익대학교</option>
+                    <option name="university" value='Skku'>성균관대학교</option>
+                    <option name="university" value='Catholic'>가톨릭대학교</option>
+                    <option name="university" value='Kaist'>한국과학기술원</option>
+                    <option name="university" value='Ewha'>이화여자대학교</option>
+                    <br>
+                    <option name="university" value='Sungshin'>성신여자대학교</option>
+                    <option name="university" value='Sookmyung'>숙명여자대학교</option>
+                    <option name="university" value='Snue'>서울교육대학교</option>
+                    <option name="university" value='Hufs'>한국외국어대학교</option>
+                    <option name="university" value='Karts'>한국예술종합학교</option>
+                    <option name="university" value='Seoultech'>서울과학기술대학교</option>
+                </select>
+            </div>
+            <input type='submit' class='login_btn' value='업데이트' style="margin:2.5rem 0 2rem 0;">
+        </form>
+    </div>
+</div>
+
+<!-- 2. 내가 쓴 게시물 수정은 모달창 안띄우고 새로운 창 띄우기 -->
+
+<!-- 3. 비번 변경 모달 -->
+<div id='m3' class="modal">
+    <div class="update_modal_content">
+        <div id='c3' class="close">&times;</div>
+        <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">비밀번호 변경</div>
+        <hr style="width:80%; margin-top:1.3rem;">
+        <!-- 폼 -->
+        <form action="/f_mod_pw/" method="post" name='form3' onsubmit="return check_up3()">
+            <input type="hidden" name="csrfmiddlewaretoken" value="m4CnymoDtWc3rELMp7oW2Afomfr7hsCYThJo09l12DPxyBcAggl6xzu0kLF3S61c">
+            <div class="regi_box">
+                <label>새 비밀번호</label>
+                <input id="pw1" type="password" name="password">
+                <label>비밀번호 재확인</label>
+                <input id="pw2" type="password">
+            </div>
+            <input type='submit' class='login_btn' value='변경하기' style="margin:2.5rem 0 2rem 0;">
+        </form>
+    </div>
+</div>
+
+<!-- 4. 회원탈퇴 모달-->
+<div id='m4' class="modal">
+    <div class="update_modal_content">
+        <div id='c4' class="close">&times;</div>
+        <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
+            회원 탈퇴
+        </div>
+        <div style="margin-top:0.5rem; font-size:0.9rem; color:rgb(199, 199, 199)">
+            비밀번호를 입력하여 Please Graduate에서 탈퇴합니다. 회원 정보 및 기이수과목 데이터가 모두 삭제됩니다.
+        </div>
+        <hr style="width:80%; margin-top:1.3rem;">
+
+        <form action="/f_delete_account/" method="post" name='form4' onsubmit="return check_up4()">
+            <input type="hidden" name="csrfmiddlewaretoken" value="m4CnymoDtWc3rELMp7oW2Afomfr7hsCYThJo09l12DPxyBcAggl6xzu0kLF3S61c">
+            <div class="regi_box">
+                <label style="text-align: center;">아이디</label>
+                <input type="text" name="student_id" placeholder='18011873'
+                       style="background-color:rgb(248,249,250);" disabled>
+                <label style="text-align: center;">비밀번호</label>
+                <input type="password" id="pw4" name="pw" placeholder="PASSWORD">
+            </div>
+            <input type='submit' class='login_btn' value='탈퇴하기' style="margin:2.5rem 0 2rem 0;">
+        </form>
+    </div>
 </div>
 
 
 
 
-
-
-
-
-  <footer class="footer">
+<footer class="footer">
     <ul class="footer_list">
         <li>
             - Contact -
@@ -186,7 +297,7 @@
         </li>
         <li>
             GitHub : <a href='https://github.com/euics/dormitory' style='color:lightgrey'
-                target='_blank'>https://github.com/euics/dormitory</a>
+                        target='_blank'>https://github.com/euics/dormitory</a>
         </li>
     </ul>
     <h2 class="copyright">Copyright
@@ -194,47 +305,71 @@
         2022 DorMe. All Rights Reserved. <br>
         김부교, 박종훈, 변은성, 이성빈
     </h2>
-  </footer>
+</footer>
 </body>
 
 
 
 
-<script src="js/modal.js"></script>
+<script src="/js/modal.js"></script>
 
 
 <script>
 
-  // 업데이트 클릭시 로딩 모달 띄우기
-  function pop_modal() {
-      document.getElementById('load_madal').style.display = "block";
-  }
+    // 업데이트 클릭시 로딩 모달 띄우기
+    function pop_modal() {
+        document.getElementById('load_madal').style.display = "block";
+    }
 
-  
-  // 모달 켜는 버튼 id
-  var b1 = document.getElementById("b1");     // 1. 내 정보 업데이트
-      // 6. 회원탈퇴
 
-  // 모달 id
-  var m1 = document.getElementById('m1');
-  
-  // 모달 끄는 버튼(X) id
-  var c1 = document.getElementById("c1");
-  
+    // 모달 켜는 버튼 id
+    var b1 = document.getElementById("b1");     // 1. 내 정보 업데이트
+    var b3 = document.getElementById("b3");     // 3. 비번 변경
+    var b4 = document.getElementById("b4");     // 4. 회원탈퇴
 
-  // 모달 키는 함수 호출
-  Btnclick(b1, m1);
 
-  // 모달 끄는 함수 호출
-  Spanclick(c1, m1);
 
-  // 모달 밖 화면 누를때 꺼지게하기
-  window.onclick = function (event) {
-      if (event.target == m1) {
-          m1.style.display = "none";
-      }
-      
-  }
+    // 모달 id
+    var m1 = document.getElementById('m1');
+    var m3 = document.getElementById('m3');
+    var m4 = document.getElementById('m4');
+
+
+
+    // 모달 끄는 버튼(X) id
+    var c1 = document.getElementById("c1");
+    var c3 = document.getElementById("c3");
+    var c4 = document.getElementById("c4");
+
+    // 모달 키는 함수 호출
+    Btnclick(b1, m1);
+    Btnclick(b3, m3);
+    Btnclick(b4, m4);
+
+
+
+
+    // 모달 끄는 함수 호출
+    Spanclick(c1, m1);
+    Spanclick(c3, m3);
+    Spanclick(c4, m4);
+
+
+
+
+
+    // 모달 밖 화면 누를때 꺼지게하기
+    window.onclick = function (event) {
+        if (event.target == m1) {
+            m1.style.display = "none";
+        }
+        if (event.target == m3) {
+            m3.style.display = "none";
+        }
+        if (event.target == m4) {
+            m4.style.display = "none";
+        }
+    }
 
 
 </script>
