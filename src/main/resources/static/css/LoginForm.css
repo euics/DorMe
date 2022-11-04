@@ -84,14 +84,14 @@ body{ background-color: #ededed; }
   width:310px;
   height: 40px;
   font-size:15px;
-  background-color: #df3278;
+  background-color: rgb(77, 69, 224);
   color:#fff;
   border:none;
   cursor: pointer;
   border-radius: 5px;
 }
 .btn:hover{
-  background:#ca296a;
+  background:rgb(64, 56, 220);
 }
 hr{
   margin-top:20px;
@@ -100,7 +100,7 @@ hr{
 
 .loginpath ul{
   width: 100%;
-  text-align: right; /* 글자를 오른쪽으로 처리 */
+  text-align: auto; /* 글자를 오른쪽으로 처리 */
   margin-bottom: 60px;
 }
 
