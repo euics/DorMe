@@ -15,8 +15,36 @@
 
 </head>
 <body>
-<nav th:replace="navbar :: navbarFragment"></nav>
 
+<nav class="navbar">
+    <div class="navbar_logo">
+        <a href="/"><img src="/images/search.svg"></a>
+    </div>
+    <div class="navbar_title">
+        DorMe
+    </div>
+
+    <ul class="navbar_menu">
+        <li>
+            <a href=#>리뷰게시판</a>
+        </li>
+
+        <li>
+            <a href='#' target="_blank">문의하기</a>
+        </li>
+
+        <li>
+            <a href=#>마이페이지</a>
+        </li>
+
+        <li>
+            <!-- 로그인 세션 활용 -->
+            <a href='/login/'>로그아웃</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- main1 -->
 <div class="gray_sec">
     <div class="container">
         <div style="font-size:4rem;">
@@ -26,7 +54,7 @@
     </div>
 </div>
 
-
+<!-- main2 -->
 <div class="white_sec">
     <div class="my_box_wrap">
         <div class="my_box">
@@ -51,11 +79,7 @@
                 </tr>
                 <tr>
                     <td class="my_box_table_1st_td">대학교</td>
-                    <td>
-
-                        세종대학교
-
-                    </td>
+                    <td>세종대학교</td>
                 </tr>
             </table>
         </div>
@@ -67,76 +91,25 @@
                 <div><i class="fas fa-user-edit"></i>내가 쓴 게시물</div>
                 <button id='b2' class="my_box_mod_btn">보러가기</button>
             </div>
-            <!-- <hr style="margin-bottom:0.8rem;">
-            <table>
-                <tr>
-                    <td class="my_box_table_1st_td">전공상태</td>
-                    <td>해당없음</td>
-                </tr>
-                <tr>
-                    <td class="my_box_table_1st_td">영어인증</td>
-                    <td>해당없음</td>
-                </tr>
-            </table> -->
+
+
             <hr style="margin-bottom:2.5rem; margin-top:2.5rem;">
+
+
             <div class="my_box_title">
                 <div><i class="fas fa-key"></i>비밀번호 변경</div>
                 <button id='b3' class="my_box_mod_btn">변경하기</button>
             </div>
+
+
             <hr style="margin-bottom:2.5rem; margin-top:2.5rem;">
+
+
             <div class="my_box_title">
                 <div><i class="fas fa-exclamation-triangle"></i>회원 탈퇴</div>
                 <button id='b4' class="my_box_mod_btn">탈퇴하기</button>
             </div>
         </div>
-
-
-        <!-- 기술구현부분 -->
-        <!-- <div class="my_box_grade">
-          <div style="padding:2.5rem 2.5rem 0 2.5rem">
-              <div class="my_box_title">
-                  <div></div>
-                  <div>여러 조건으로 검색해보세요!</div>
-                  <div></div>
-              </div>
-              <hr style="margin-top:2.5rem;">
-              <section class="section">
-                <div class="about">
-                  <div class="about__card">
-                    <img class="about__icon" src="../img/about_1_dollar.svg" alt="">
-                    <h2 class="about__title _1">
-                      가격
-                    </h2>
-                    <p class="about__text">
-                      가격이 착한 곳을 <br>
-                      찾으시나요?
-                    </p>
-                  </div>
-                  <div class="about__card">
-                    <img class="about__icon" src="../img/about_2_map.svg" alt="">
-                    <h2 class="about__title _2">
-                      거리
-                    </h2>
-                    <p class="about__text">
-                      학교와 가까운 곳을 <br>
-                      찾으시나요?
-                    </p>
-                  </div>
-                  <div class="about__card">
-                    <img class="about__icon" src="../img/about_3_facility.svg" alt="">
-                    <h2 class="about__title _3">
-                      시설
-                    </h2>
-                    <p class="about__text">
-                      다양한 시설이 있는 곳을 <br>
-                      찾으시나요?
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-          </div>
-        </div> -->
     </div>
 </div>
 
@@ -151,13 +124,12 @@
         <hr style="width:80%; margin-top:1.3rem;">
         <!-- 폼 -->
         <form action="/f_mod_info/" method="post" name='form1' onsubmit="return check_up1()">
-            <input type="hidden" name="csrfmiddlewaretoken" value="gSYKcfoJRVb244YMREduqVhPZ2MsEhaKN55LE2l7qCOwb1pAINaEVUwrXy0ofVzY">
+            <input type="hidden" name="csrfmiddlewaretoken"
+                   value="gSYKcfoJRVb244YMREduqVhPZ2MsEhaKN55LE2l7qCOwb1pAINaEVUwrXy0ofVzY">
             <div class="regi_box">
                 <label style="text-align: center;">아이디</label>
                 <input type="text" name="student_id" placeholder='kimbk98(아이디는 못바꾸게)'
                        style="background-color:rgb(248,249,250);" disabled>
-                <!-- <label style="text-align: center;">비밀번호</label>
-                <input type="password" id="pw" name="pw" placeholder="PASSWORD"> -->
                 <label style="text-align: center;">별명</label>
                 <input type="text" name="nickname" placeholder="NICKNAME">
                 <label style="text-align: center;">지역</label>
@@ -219,7 +191,8 @@
         <hr style="width:80%; margin-top:1.3rem;">
         <!-- 폼 -->
         <form action="/f_mod_pw/" method="post" name='form3' onsubmit="return check_up3()">
-            <input type="hidden" name="csrfmiddlewaretoken" value="m4CnymoDtWc3rELMp7oW2Afomfr7hsCYThJo09l12DPxyBcAggl6xzu0kLF3S61c">
+            <input type="hidden" name="csrfmiddlewaretoken"
+                   value="m4CnymoDtWc3rELMp7oW2Afomfr7hsCYThJo09l12DPxyBcAggl6xzu0kLF3S61c">
             <div class="regi_box">
                 <label>새 비밀번호</label>
                 <input id="pw1" type="password" name="password">
@@ -239,15 +212,16 @@
             회원 탈퇴
         </div>
         <div style="margin-top:0.5rem; font-size:0.9rem; color:rgb(199, 199, 199)">
-            비밀번호를 입력하여 Please Graduate에서 탈퇴합니다. 회원 정보 및 기이수과목 데이터가 모두 삭제됩니다.
+            비밀번호를 입력하여 DorMe에서 탈퇴합니다. 회원 정보 및 데이터가 모두 삭제됩니다.
         </div>
         <hr style="width:80%; margin-top:1.3rem;">
 
         <form action="/f_delete_account/" method="post" name='form4' onsubmit="return check_up4()">
-            <input type="hidden" name="csrfmiddlewaretoken" value="m4CnymoDtWc3rELMp7oW2Afomfr7hsCYThJo09l12DPxyBcAggl6xzu0kLF3S61c">
+            <input type="hidden" name="csrfmiddlewaretoken"
+                   value="m4CnymoDtWc3rELMp7oW2Afomfr7hsCYThJo09l12DPxyBcAggl6xzu0kLF3S61c">
             <div class="regi_box">
                 <label style="text-align: center;">아이디</label>
-                <input type="text" name="student_id" placeholder='18011873'
+                <input type="text" name="student_id" placeholder='kimbk98'
                        style="background-color:rgb(248,249,250);" disabled>
                 <label style="text-align: center;">비밀번호</label>
                 <input type="password" id="pw4" name="pw" placeholder="PASSWORD">
@@ -256,8 +230,6 @@
         </form>
     </div>
 </div>
-
-
 
 
 <footer class="footer">
@@ -269,8 +241,12 @@
             Email : kimde9612@gmail.com
         </li>
         <li>
-            GitHub : <a href='https://github.com/euics/dormitory' style='color:lightgrey'
-                        target='_blank'>https://github.com/euics/dormitory</a>
+            GitHub(Back) : <a href='https://github.com/euics/dormitory' style='color:lightgrey'
+                              target='_blank'>https://github.com/euics/dormitory</a>
+        </li>
+        <li>
+            GitHub(Front) : <a href='https://github.com/kbk98/PR_dormitory' style='color:lightgrey'
+                               target='_blank'>https://github.com/kbk98/PR_dormitory</a>
         </li>
     </ul>
     <h2 class="copyright">Copyright
@@ -282,32 +258,22 @@
 </body>
 
 
-
-
 <script src="/js/modal.js"></script>
-
-
 <script>
-
     // 업데이트 클릭시 로딩 모달 띄우기
     function pop_modal() {
         document.getElementById('load_madal').style.display = "block";
     }
-
 
     // 모달 켜는 버튼 id
     var b1 = document.getElementById("b1");     // 1. 내 정보 업데이트
     var b3 = document.getElementById("b3");     // 3. 비번 변경
     var b4 = document.getElementById("b4");     // 4. 회원탈퇴
 
-
-
     // 모달 id
     var m1 = document.getElementById('m1');
     var m3 = document.getElementById('m3');
     var m4 = document.getElementById('m4');
-
-
 
     // 모달 끄는 버튼(X) id
     var c1 = document.getElementById("c1");
@@ -319,17 +285,10 @@
     Btnclick(b3, m3);
     Btnclick(b4, m4);
 
-
-
-
     // 모달 끄는 함수 호출
     Spanclick(c1, m1);
     Spanclick(c3, m3);
     Spanclick(c4, m4);
-
-
-
-
 
     // 모달 밖 화면 누를때 꺼지게하기
     window.onclick = function (event) {
@@ -343,9 +302,5 @@
             m4.style.display = "none";
         }
     }
-
-
 </script>
-
-
 </html>
