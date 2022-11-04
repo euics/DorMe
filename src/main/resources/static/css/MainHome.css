@@ -19,7 +19,6 @@ a {
   padding: 13px;
 }
 
-
 .navbar_logo img {
   position: relative;
   width: 110px;
@@ -43,24 +42,22 @@ a {
 
 .navbar_menu li a:hover {
   font-weight: bold;
-  color : rgb(26, 26, 164);
+  color : rgb(77, 69, 224);
 }
 
-
-
-/* header 부분 css */
+/* ------------------------------header css------------------------------ */
 .bg_wrapper{
   background-color: rgba(241, 241, 241, 0.575);
   margin-bottom: 30px;
 }
 
 
-/* main 부분 css */
+/* ------------------------------main css------------------------------ */
 .main_bg {
   width:100%;
   max-width: 1600px;
   min-height:720px;
-  background-image: url('/images/main_bg.jpg');
+  background-image: url('../images/main_bg.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   margin: 0 auto;
@@ -75,12 +72,6 @@ a {
   background-color: rgba(0, 0, 0, 0.67);
 
 }
-
-
-
-
-
-
 
 .section {
   padding: 16px;
@@ -101,11 +92,13 @@ a {
   background-color: #3e3f3f;
   border-radius: 12px;
 }
+
 .about__icon {
   width: 100px;
   height: 150px;
   opacity: 0.25;
 }
+
 /* 카드 안의 텍스트 */
 .about__title._1 {
   color: #FFB974;
@@ -124,9 +117,9 @@ a {
 
 .about__card {
   width: 200px;
-
   transition: all 350ms;
 }
+
 /* 영역에 마우스 오버시 해당 카드 외 축소 */
 .about:hover .about__card:not(:hover) {
   transform: scale(0.9);
@@ -152,21 +145,13 @@ a {
 
 
 
-
-
-
-
-
 .bg_big_text_slogan {
   padding-top:50px;
-  /* max-width:1600px;
-  min-height:140px; */
   margin:0 auto;
   text-align:center;
   color:white;
   font-size:40px;
 }
-
 
 .bg_text_btn{
   text-align: center;
@@ -189,9 +174,6 @@ a {
   text-align:center;
   color: white
 }
-
-
-
 
 .bg_small_text{
   letter-spacing:-3px;
@@ -243,6 +225,7 @@ a {
   letter-spacing: 2px;
   border-right: 0.1px solid lightgray;
 }
+
 .footer_list li {
   margin: 10px 150px 5px;
   text-align: center;
