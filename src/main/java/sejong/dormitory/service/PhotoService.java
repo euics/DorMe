@@ -7,6 +7,8 @@ import sejong.dormitory.dto.PhotoDto;
 import sejong.dormitory.entity.Photo;
 import sejong.dormitory.repository.PhotoRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PhotoService {
@@ -14,9 +16,9 @@ public class PhotoService {
     private final PhotoRepository photoRepository;
 
 
-    /**
-     * 이미지 개별 조회
-     */
+    public List<Photo> findAllByBoardId(Long boardId){
+        return photoRepository.findAllByBoardId(boardId);
+    }
     @Transactional(readOnly = true)
     public PhotoDto findByFileId(Long id){
 

@@ -36,11 +36,11 @@ public class FileHandler {
 
             // 프로젝트 디렉터리 내의 저장을 위한 절대 경로 설정
             // 경로 구분자 File.separator 사용
-            String absolutePath = new File("").getAbsolutePath() + File.separator + File.separator;
+            String absolutePath = new File("").getAbsolutePath() + "//";
 
             System.out.println("absolutePath = " + absolutePath);
             // 파일을 저장할 세부 경로 지정
-            String path = "images" + File.separator + current_date;
+            String path = "images" + "/" + current_date;
             File file = new File(path);
             System.out.println("file = " + file);
 
@@ -79,7 +79,7 @@ public class FileHandler {
                 // 파일 DTO 생성
                 PhotoDto photoDto = PhotoDto.builder()
                         .origFileName(multipartFile.getOriginalFilename())
-                        .filePath(path + File.separator + new_file_name)
+                        .filePath(path + "/" + new_file_name)
                         .fileSize(multipartFile.getSize())
                         .build();
 
@@ -94,7 +94,7 @@ public class FileHandler {
                 fileList.add(photo);
 
                 // 업로드 한 파일 데이터를 지정한 파일에 저장
-                file = new File(absolutePath + path + File.separator + new_file_name);
+                file = new File(absolutePath + path + "/" + new_file_name);
                 multipartFile.transferTo(file);
 
                 // 파일 권한 설정(쓰기, 읽기)

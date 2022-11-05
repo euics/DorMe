@@ -14,9 +14,11 @@ import sejong.dormitory.dto.BoardDto;
 import sejong.dormitory.entity.Board;
 import sejong.dormitory.entity.BoardComment;
 import sejong.dormitory.entity.Member;
+import sejong.dormitory.entity.Photo;
 import sejong.dormitory.service.BoardCommentService;
 import sejong.dormitory.service.BoardService;
 import sejong.dormitory.service.MemberService;
+import sejong.dormitory.service.PhotoService;
 
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class BoardController {
     private final MemberService memberService;
     private final BoardService boardService;
     private final BoardCommentService boardCommentService;
-
+    private final PhotoService photoService;
     @GetMapping("")
     public String viewPostList(Model model, @PageableDefault(size = 10) Pageable pageable,
                             @RequestParam(required = false, defaultValue = "") String searchText) {
@@ -83,11 +85,12 @@ public class BoardController {
 
         Long countVisit = board.getCountVisit()+1L;
         boardService.updateCountVisit(board, countVisit);
-
-
         board.updateVisit(countVisit);
-        List<BoardComment> comments = boardCommentService.findBoardCommentsByBoardId(id);
 
+        List<BoardComment> comments = boardCommentService.findBoardCommentsByBoardId(id);
+        List<Photo> photos = photoService.findAllByBoardId(id);
+
+        model.addAttribute("photos",photos);
         model.addAttribute("comments", comments);
         model.addAttribute(board);
 
