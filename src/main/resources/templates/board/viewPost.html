@@ -43,6 +43,7 @@
                 <button type="button" class="btn btn-secondary pull-right" onclick="location.href='/boards/'">목록으로</button>
             </div>
 
+            <img th:each="photo : ${photos}" th:src="|../../../../${photo.getFilePath()}|" width="300" height="300">
         </div>
     </div>
 </div>
