@@ -16,33 +16,7 @@
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="navbar_logo">
-        <a href="/"><img src="/images/search.svg"></a>
-    </div>
-    <div class="navbar_title">
-        DorMe
-    </div>
-
-    <ul class="navbar_menu">
-        <li>
-            <a href=#>리뷰게시판</a>
-        </li>
-
-        <li>
-            <a href='#' target="_blank">문의하기</a>
-        </li>
-
-        <li>
-            <a href=#>마이페이지</a>
-        </li>
-
-        <li>
-            <!-- 로그인 세션 활용 -->
-            <a href='/login/'>로그아웃</a>
-        </li>
-    </ul>
-</nav>
+<nav th:replace="navbar :: navbarFragment"></nav>
 
 <!-- main1 -->
 <div class="gray_sec">
@@ -66,20 +40,20 @@
             <hr>
             <table>
                 <tr>
-                    <td class="my_box_table_1st_td">이름</td>
-                    <td>김부교</td>
+                    <td class="my_box_table_1st_td">아이디</td>
+                    <td th:text="${member.getId()}"></td>
                 </tr>
                 <tr>
                     <td class="my_box_table_1st_td">별명</td>
-                    <td>박부교(최대 12자로)</td>
+                    <td th:text="${member.getNickname()}"></td>
                 </tr>
                 <tr>
                     <td class="my_box_table_1st_td">지역</td>
-                    <td>서울</td>
+                    <td th:text="${member.getLocal()}"></td>
                 </tr>
                 <tr>
                     <td class="my_box_table_1st_td">대학교</td>
-                    <td>세종대학교</td>
+                    <td th:text="${member.getSchool()}">세종대학교</td>
                 </tr>
             </table>
         </div>
@@ -89,7 +63,7 @@
         <div class="my_box">
             <div class="my_box_title">
                 <div><i class="fas fa-user-edit"></i>내가 쓴 게시물</div>
-                <button id='b2' class="my_box_mod_btn">보러가기</button>
+                <button onclick="location.href='/mypage/myPost'" id='b2' class="my_box_mod_btn">보러가기</button>
             </div>
 
 
@@ -226,35 +200,13 @@
                 <label style="text-align: center;">비밀번호</label>
                 <input type="password" id="pw4" name="pw" placeholder="PASSWORD">
             </div>
-            <input type='submit' class='login_btn' value='탈퇴하기' style="margin:2.5rem 0 2rem 0;">
+            <input onclick="location.href='/mypage/unRegister'" type='submit' class='login_btn' value='탈퇴하기' style="margin:2.5rem 0 2rem 0;">
         </form>
     </div>
 </div>
 
 
-<footer class="footer">
-    <ul class="footer_list">
-        <li>
-            - Contact -
-        </li>
-        <li>
-            Email : kimde9612@gmail.com
-        </li>
-        <li>
-            GitHub(Back) : <a href='https://github.com/euics/dormitory' style='color:lightgrey'
-                              target='_blank'>https://github.com/euics/dormitory</a>
-        </li>
-        <li>
-            GitHub(Front) : <a href='https://github.com/kbk98/PR_dormitory' style='color:lightgrey'
-                               target='_blank'>https://github.com/kbk98/PR_dormitory</a>
-        </li>
-    </ul>
-    <h2 class="copyright">Copyright
-        <i class="far fa-copyright"></i>
-        2022 DorMe. All Rights Reserved. <br>
-        김부교, 박종훈, 변은성, 이성빈
-    </h2>
-</footer>
+<div th:replace="footer :: footerFragment"></div>
 </body>
 
 
