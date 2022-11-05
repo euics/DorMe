@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import sejong.dormitory.dto.BoardDto;
 import sejong.dormitory.dto.BoardResponseDto;
 import sejong.dormitory.entity.Board;
+import sejong.dormitory.entity.Member;
 import sejong.dormitory.entity.Photo;
 import sejong.dormitory.repository.BoardRepository;
 import sejong.dormitory.repository.PhotoRepository;
@@ -97,5 +98,9 @@ public class BoardService {
         return boardRepository.findById(id).get();
     }
 
+    @Transactional
+    public Page<Board> findByMember(Member member,Pageable pageable){
+        return boardRepository.findByMember(member, pageable);
+    }
 
 }
