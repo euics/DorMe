@@ -1,4 +1,4 @@
-package sejong.dormitory.dto;
+package sejong.dormitory.dto.dormitoryPage;
 
 import lombok.Builder;
 import lombok.Getter;

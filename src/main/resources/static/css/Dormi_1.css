@@ -1,0 +1,225 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR','sans-serif';
+    background-color: rgb(248,249,250);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ------------------------------nav css------------------------------ */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom : 0.001px solid rgb(216, 216, 216);
+    background-color: white;
+    padding: 13px;
+}
+
+.navbar_logo img {
+    position: relative;
+    width: 110px;
+    height: 52px;
+}
+
+.navbar_menu {
+    display: flex;
+    font-size: 20px;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    margin-left: min(50%, 800px);
+}
+
+.navbar_menu li {
+    font-size: 19px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.navbar_menu li a:hover {
+    font-weight: bold;
+    color : rgb(77, 69, 224);
+}
+
+
+/* ------------------------------main1 css------------------------------ */
+
+
+.slides li {
+    list-style-type: none;
+    float:left;
+}
+
+.slides li img {
+    width:640px;
+    height:400px;
+}
+
+/* 보여줄 구간의 높이와 넓이 설정 */
+#slideShow {
+    width: 840px;
+    height: 400px;
+    position: relative;
+    margin: 50px auto;
+    overflow: hidden;
+    /*리스트 형식으로 이미지를 일렬로
+    정렬할 것이기 때문에, 500px 밖으로 튀어 나간 이미지들은
+    hidden으로 숨겨줘야됨*/
+}
+
+
+.slides {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4540px; /* 슬라이드할 사진과 마진 총 넓이 */
+    transition: left 0.5s ease-out;
+    /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
+}
+
+/* 첫 번째 슬라이드 가운데에 정렬하기위해
+첫번째 슬라이드만 margin-left조정 */
+.slides li:first-child {
+    margin-left: 100px;
+}
+
+/* 슬라이드들 옆으로 정렬 */
+.slides li:not(:last-child) {
+    float: left;
+    margin-right: 100px;
+}
+
+.slides li {
+    float: left;
+}
+
+.controller span {
+    position:absolute;
+    background-color: transparent;
+    color: black;
+    text-align: center;
+    border-radius: 50%;
+    padding: 10px 20px;
+    top: 50%;
+    font-size: 1.3em;
+    cursor: pointer;
+}
+
+/* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
+.controller span:hover {
+    background-color: rgba(128, 128, 128, 0.11);
+}
+
+.prev {
+    left: 10px;
+}
+
+/* 이전 화살표에 마우스 커서가 올라가 있을때
+이전 화살표가 살짝 왼쪽으로 이동하는 효과*/
+.prev:hover {
+    transform: translateX(-10px);
+}
+
+.next {
+    right: 10px;
+}
+
+/* 다음 화살표에 마우스 커서가 올라가 있을때
+이전 화살표가 살짝 오른쪽으로 이동하는 효과*/
+.next:hover {
+    transform: translateX(10px);
+}
+
+.dormi_name {
+    /* margin:0 auto; */
+    text-align:center;
+    font-size:40px;
+    font-weight:bold;
+    margin-top:2rem;
+    margin-bottom:2rem;
+}
+
+
+
+/* ------------------------------main2 css------------------------------ */
+
+.white_sec {
+    background-color: white;
+    padding-bottom: 1rem;
+}
+
+.dormi_box_wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    margin-top:1.5rem;
+    padding-left : 28rem;
+    padding-right : 28rem;
+}
+
+.dormi_box_grade {
+    display: flex;
+    flex-direction: column;
+    width: 68rem;
+    height: auto;
+    margin: 1rem 1rem 4rem;
+    border: 1px solid rgb(216, 216, 216);
+    background-color: white;
+}
+
+.dormi_box_grade hr {
+    width:100%;
+    border-top: 0.001px solid rgb(216, 216, 216);
+    border-bottom: 0.001px solid white;
+    margin-top:1rem;
+    margin-bottom:1.3rem;
+}
+
+.dormi_box_title {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    font-size:1.4rem;
+    font-weight: bold;
+}
+
+.dormi_box_title i {
+    margin-left:1rem;
+    margin-right:1rem;
+    color:rgb(136, 136, 136);
+}
+
+.grade_table {
+    width: 90%;
+    /* text-align: center; */
+    margin:0 auto;
+    margin-top:1rem;
+    margin-bottom:4rem;
+}
+
+.grade_table_th {
+    font-size: 1rem;
+    height: 2.5rem;
+    background-color: #f8f8f8;
+    border: 1px solid #dadada;
+}
+
+.grade_table_td {
+    font-size: 0.9rem;
+    height: 2rem;
+    border :1px solid #dadada;
+    padding-left: 8px;
+}

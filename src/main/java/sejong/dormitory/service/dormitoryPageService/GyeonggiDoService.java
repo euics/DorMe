@@ -1,11 +1,11 @@
-package sejong.dormitory.service;
+package sejong.dormitory.service.dormitoryPageService;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
-import sejong.dormitory.dto.GyeonggiDo;
+import sejong.dormitory.dto.dormitoryPage.GyeonggiDo;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;

@@ -1,11 +1,11 @@
-package sejong.dormitory.controller;
+package sejong.dormitory.controller.dormitoryPageController;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import sejong.dormitory.dto.GyeonggiDo;
-import sejong.dormitory.service.GyeonggiDoService;
+import sejong.dormitory.dto.dormitoryPage.GyeonggiDo;
+import sejong.dormitory.service.dormitoryPageService.GyeonggiDoService;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 public class GyeonggiDoController {
     private final GyeonggiDoService gyeonggiDoService;
 
-    @GetMapping("/test")
+    @GetMapping("/gyeonggiDo")
     public String test(Model model) throws IOException{
         List<GyeonggiDo> gyeonggiDo = gyeonggiDoService.getData1();
         GyeonggiDo gyeonggiDo2 = gyeonggiDoService.getData2();

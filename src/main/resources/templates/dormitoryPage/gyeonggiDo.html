@@ -1,50 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dorme</title>
+
+  <script src="https://kit.fontawesome.com/a99efffa96.js" crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+  <link href="/css/Dormi_1.css" rel="stylesheet">
+  <link href="/css/MainHome.css" rel="stylesheet" >
+  <link rel="icon" href="/images/favicon_img.png">
 </head>
 <body>
-<table>
-    <tr>
-        <th>입사조건</th>
-        <td th:text="${element.getCondition1()}"></td>
-    </tr>
-    <tr>
-        <th>        </th>
-        <td th:text="${element.getCondition2()}"></td>
-    </tr>
-    <tr>
-        <th>가격</th>
-        <td th:text="${element.getPrice()}"></td>
-    </tr>
-    <tr>
-        <th>인원</th>
-        <td th:text="${element.getRecruitMemberInfo()}"></td>
-    </tr>
-    <tr>
-        <th>모집시기</th>
-        <td th:text="${element.getRecruitPeriod()}"></td>
-    </tr>
-    <tr>
-        <th>위치</th>
-        <td>01377 서울특별시 도봉구 우이천로 394</td>
-    </tr>
-    <tr>
-        <th>문의 연락처</th>
-        <td>Tel 02) 996-8505, 998-1003</td>
-    </tr>
-</table>
+<nav th:replace="navbar :: navbarFragment"></nav>
+
+<!-- 이미지 슬라이더 -->
+<div id="slideShow">
+  <ul class="slides">
+    <li th:each="img, imgStat:${img}">
+    <a th:href ="@{${img.detailImagePath}}"><img th:src="@{${img.detailImagePath}}"></a>
+    </li>
+  </ul>
+  <p class="controller">
+
+    <!-- &lang: 왼쪽 방향 화살표
+    &rang: 오른쪽 방향 화살표 -->
+    <span class="prev">&lang;</span>
+    <span class="next">&rang;</span>
+  </p>
+</div>
+<script src="/js/Dormi_1.js"></script>
 
 
-<table>
-    <tr>
-        <td th:each="img, imgStat:${img}"><a th:href ="@{${img.detailImagePath}}">
-            <img th:src="@{${img.detailImagePath}}" style="width: 400px; height: 300px; float: left"></a>
-        </td>
 
-    </tr>
-</table>
+<div class="dormi_name">경기푸른미래관</div>
+
+<hr style="margin:2.5rem auto 2.5rem; width:45%; height:2px; border:0px; background-color: rgb(145, 140, 140);">
+
+<div class="white_sec">
+  <div class="dormi_box_wrap">
+    <div class="dormi_box_grade">
+      <div style="padding:2.5rem 1.5rem 0 1.5rem">
+
+        <!-- 건물정보 -->
+        <div class="dormi_box_title">
+          <div style="margin-left:30px"><i class="fa-solid fa-building"></i>건물정보</div>
+        </div>
+
+        <hr>
+
+        <table id="short_table_1" class="grade_table" style="margin-top:2rem;">
+          <tr>
+            <th class="grade_table_th" style="width:18%">분류</th>
+            <td class="grade_table_td">재경기숙사</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">가격</th>
+            <td class="grade_table_td" th:text="${element.getPrice()}">가격...(크롤링 필요)</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">위치</th>
+            <td class="grade_table_td">01377 서울특별시 도봉구 우이천로 394</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">연락처</th>
+            <td class="grade_table_td">Tel 02) 996-8505, 998-100</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">모집/선발</th>
+            <td class="grade_table_td" th:text="${element.getRecruitMemberInfo()}">해당기숙사 URL...(크롤링 해도그만)</td>
+          </tr>
+
+        </table>
+
+        <!-- 주요시설 -->
+        <div class="dormi_box_title">
+          <div style="margin-left:30px"><i class="fa-solid fa-bed"></i>주요시설</div>
+        </div>
+
+        <hr>
+
+        <table id="short_table_2" class="grade_table" style="margin-top:2rem;">
+          <tr>
+            <th class="grade_table_th" style="width:18%">사실</th>
+            <td class="grade_table_td">185개실(2인 1실)</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">공동거실</th>
+            <td class="grade_table_td">1개실 (추계관 1실)</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">독서실</th>
+            <td class="grade_table_td">세미나실, 컴퓨터공부방 포함 - 112석<br>
+              교양도서 3,600여권 비치<br>
+              ※ 도서대출 : 매주 월 ~ 금 21:00 ~ 23:00</td>
+          </tr>
+        </table>
+
+        <!-- 편의시설 -->
+        <div class="dormi_box_title">
+          <div style="margin-left:30px"><i class="fa-solid fa-warehouse"></i>편의시설</div>
+        </div>
+
+        <hr>
+
+        <table id="short_table_3" class="grade_table" style="margin-top:2rem;">
+          <tr>
+            <th class="grade_table_th" style="width:18%">구내식당</th>
+            <td class="grade_table_td">142석, 1일 3식 제공</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">우편물</th>
+            <td class="grade_table_td">수신 - 도서관 앞 우편함, 무인택배함<br>
+              특수우편물 - 생활안내실에서 접수/전달</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">체력단련실</th>
+            <td class="grade_table_td">헬스 기구 및 탁구대</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">다목적구장</th>
+            <td class="grade_table_td">농구, 족구, 배구, 테니스 등</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">강당</th>
+            <td class="grade_table_td">300석, 위치 - 추계관 5층</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">야외휴게실</th>
+            <td class="grade_table_td">야외 친목·휴게공간</td>
+          </tr>
+          <tr>
+            <th class="grade_table_th" style="width:18%">세탁실</th>
+            <td class="grade_table_td">공용세탁실 6개소(세탁기 38대 설치)</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
