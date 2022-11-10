@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>입사조건</th>
+        <td th:text="${element.getCondition1()}"></td>
+    </tr>
+    <tr>
+        <th>        </th>
+        <td th:text="${element.getCondition2()}"></td>
+    </tr>
+    <tr>
+        <th>가격</th>
+        <td th:text="${element.getPrice()}"></td>
+    </tr>
+    <tr>
+        <th>인원</th>
+        <td th:text="${element.getRecruitMemberInfo()}"></td>
+    </tr>
+    <tr>
+        <th>모집시기</th>
+        <td th:text="${element.getRecruitPeriod()}"></td>
+    </tr>
+    <tr>
+        <th>위치</th>
+        <td>01377 서울특별시 도봉구 우이천로 394</td>
+    </tr>
+    <tr>
+        <th>문의 연락처</th>
+        <td>Tel 02) 996-8505, 998-1003</td>
+    </tr>
+</table>
+
+
+<table>
+    <tr>
+        <td th:each="img, imgStat:${img}"><a th:href ="@{${img.detailImagePath}}">
+            <img th:src="@{${img.detailImagePath}}" style="width: 400px; height: 300px; float: left"></a>
+        </td>
+
+    </tr>
+</table>
+
+</body>
+</html>
