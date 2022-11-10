@@ -28,11 +28,11 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
 
   /* 개발용 설정 */
-  
+
 }
 
-li{ list-style: none; } 
-a{ text-decoration: none; } 
+li{ list-style: none; }
+a{ text-decoration: none; }
 button{ cursor: pointer; }
 
 body{ background-color: #ededed; }
@@ -49,7 +49,7 @@ body{ background-color: #ededed; }
 }
 
 #login_form{
-   /* text-align:center; */
+  /* text-align:center; */
   border-radius: 10px;
   padding:30px 50px;
   background: #fff;
@@ -71,7 +71,7 @@ body{ background-color: #ededed; }
   height:30px;
   padding-left:10px;
   background-color: #f4f4f4;
-   /* margin-left:10px; */
+  /* margin-left:10px; */
   border:none;
   border-radius: 5px;
 }
@@ -81,12 +81,12 @@ body{ background-color: #ededed; }
 }
 
 .selectbox {
-  width: 300px; 
-  padding: .8em .5em; 
+  width: 300px;
+  padding: .8em .5em;
   border: 1px solid #999;
-  font-family: inherit;  
-  background: url('arrow.jpg') no-repeat 95% 50%; 
-  border-radius: 0px; 
+  font-family: inherit;
+  background: url('arrow.jpg') no-repeat 95% 50%;
+  border-radius: 0px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -102,7 +102,7 @@ body{ background-color: #ededed; }
   width:310px;
   height: 40px;
   font-size:15px;
-  background-color: #df3278;
+  background-color: rgb(77, 69, 224);
   color:#fff;
   border:none;
   cursor: pointer;
@@ -110,7 +110,7 @@ body{ background-color: #ededed; }
 }
 
 .btn:hover{
-  background:#ca296a;
+  background:rgb(64, 56, 220);
 }
 
 hr{
