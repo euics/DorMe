@@ -40,6 +40,9 @@ dependencies {
 
 	// modelmapper 라이브러리
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
+
+	//크롤링
+	implementation 'org.jsoup:jsoup:1.15.3'
 }
 
 tasks.named('test') {
