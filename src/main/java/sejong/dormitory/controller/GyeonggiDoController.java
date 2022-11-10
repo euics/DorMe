@@ -21,6 +21,6 @@ public class GyeonggiDoController {
         GyeonggiDo gyeonggiDo2 = gyeonggiDoService.getData2();
         model.addAttribute("img",gyeonggiDo);
         model.addAttribute("element",gyeonggiDo2);
-        return "gyeonggiDo";
+        return "dormitoryPage/gyeonggiDo";
     }
 }
