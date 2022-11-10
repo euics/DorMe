@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAP 로그인 서비스 - 샘플</title>
+
+  <script src="https://kit.fontawesome.com/a99efffa96.js" crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+  <link href="/css/loginMap.css" rel="stylesheet">
+  <link href="/css/MainHome.css" rel="stylesheet" >
+  <link rel="icon" href="/images/favicon_img.png">
+
+</head>
+<body>
+
+<nav th:replace="navbar :: navbarFragment"></nav>
+
+<!-- 지도 표시 div  -->
+<div id="map" style="width:100%;height:800px;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1bad0fbb7d70210144aa465b1c6b8f9f"></script>
+<script>
+  var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+          mapOption = {
+            center: new kakao.maps.LatLng(37.5519,127.0737), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+          };
+
+  // 지도를 표시할 div와  지도 옵션으로  지도를 생성
+  var map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+  /*---------------------- 좌표 ------------------------*/
+
+  var Sejong = [
+    {
+      title: '행복기숙사 - 새날관',
+      content: '<div class ="label"><span class="left"></span><span class="center"><a href = "http://127.0.0.1:5500/MainHome/MainHome.html">행복기숙사 - 새날관</span><span class="right"></span></div>',
+      latlng: new kakao.maps.LatLng(37.5534,127.0727)
+    },
+  ];
+
+  var Dormitory = [
+    {
+      title: '홍제행복기숙사',
+      content: '<div class ="label"><span class="left"></span><span class="center"><a href = "http://127.0.0.1:5500/MainHome/MainHome.html">홍제행복기숙사</span><span class="right"></span></div>',
+      latlng: new kakao.maps.LatLng(37.5862, 126.938)
+    },
+    {
+      title: '강원학사(도봉)',
+      content: '<div class ="label"><span class="left"></span><span class="center"><a href = "http://127.0.0.1:5500/MainHome/MainHome.html">강원학사(도봉)</span><span class="right"></span></div>',
+      latlng: new kakao.maps.LatLng(37.6501, 127.0349)
+    },
+    {
+      title: '강원학사(관악)',
+      content: '<div class ="label"><span class="left"></span><span class="center"><a href = "http://127.0.0.1:5500/MainHome/MainHome.html">강원학사(관악)</span><span class="right"></span></div>',
+      latlng: new kakao.maps.LatLng(37.5001, 126.9222)
+    },
+    {
+      title: '경기푸른미래관',
+      content: '<div class ="label"><span class="left"></span><span class="center"><a href = "http://127.0.0.1:5500/MainHome/MainHome.html">경기푸른미래관</span><span class="right"></span></div>',
+      latlng: new kakao.maps.LatLng(37.6518, 127.0212)
+    },
+    {
+      title: '평택시장학관',
+      content: '<div class ="label"><span class="left"></span><span class="center"><a href = "http://127.0.0.1:5500/MainHome/MainHome.html">평택시장학관</span><span class="right"></span></div>',
+      latlng: new kakao.maps.LatLng(37.6342, 127.0229)
+    }
+  ];
+
+  var University = [
+    {
+      title: '세종대학교',
+      content: '<div class ="label"><span class="left"></span><span class="center"><a href = "http://127.0.0.1:5500/MainHome/MainHome.html">세종대학교</span><span class="right"></span></div>',
+      latlng: new kakao.maps.LatLng(37.5519,127.0737)
+    },
+  ]
+
+
+  /*----------------------마커 생성 및 표시------------------------*/
+
+  for (var i = 0; i < Dormitory.length; i ++) {
+    var marker = new kakao.maps.Marker({
+      map: map,
+      position: Dormitory[i].latlng, // 마커 표시위치
+      title : Dormitory[i].title, // 마커 타이틀
+    });
+  }
+
+  for (var i = 0; i < Sejong.length; i ++) {
+    var marker = new kakao.maps.Marker({
+      map: map,
+      position: Sejong[i].latlng,
+      title : Sejong[i].title,
+    });
+  }
+
+  // 마커 이미지의 이미지 주소입니다
+  var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+  for (var i = 0; i < University.length; i ++) {
+    var imageSize = new kakao.maps.Size(24, 35); // 마커 이미지의 이미지 크기
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);//이미지 적용
+
+    var marker = new kakao.maps.Marker({
+      map: map,
+      position: University[i].latlng,
+      title : University[i].title,
+      image : markerImage, // 마커 이미지
+    });
+  }
+
+
+  /*----------------------커스텀 오버레이------------------------*/
+  for (var i = 0; i < University.length; i ++) {
+    var customOverlay = new kakao.maps.CustomOverlay({
+      position: University[i].latlng,
+      content: University[i].content,
+    });
+    customOverlay.setMap(map);
+  }
+
+  for (var i = 0; i < Dormitory.length; i ++) {
+    var customOverlay = new kakao.maps.CustomOverlay({
+      position: Dormitory[i].latlng,
+      content: Dormitory[i].content,
+    });
+    customOverlay.setMap(map);
+  }
+
+  for (var i = 0; i < Sejong.length; i ++) {
+    var customOverlay = new kakao.maps.CustomOverlay({
+      position: Sejong[i].latlng,
+      content: Sejong[i].content,
+    });
+    customOverlay.setMap(map);
+  }
+
+
+</script>
+</body>
+</html>
