@@ -16,7 +16,7 @@ public class GangwonGwanakController {
     private final GangwonGwanakService gangwonGwanakService;
 
     @GetMapping("/gangwonGwanak")
-    public String gangwonDobong(Model model) throws IOException {
+    public String gangwonGwanak(Model model) throws IOException {
         GangwonDobong data1 = gangwonGwanakService.getData1();
         List<GangwonDobong> data2 = gangwonGwanakService.getData2();
         model.addAttribute("data1",data1);
