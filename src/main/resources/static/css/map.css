@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR','sans-serif';
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* ------------------------------nav css------------------------------ */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom : 0.001px solid rgb(216, 216, 216);
+    background-color: white;
+    padding: 13px;
+}
+
+.navbar_logo img {
+    position: relative;
+    width: 110px;
+    height: 52px;
+}
+
+.navbar_menu {
+    display: flex;
+    font-size: 20px;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    margin-left: min(50%, 800px);
+}
+
+.navbar_menu li {
+    font-size: 19px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.navbar_menu li a:hover {
+    font-weight: bold;
+    color : rgb(77, 69, 224);
+}
+
+/* ------------------------------header css------------------------------ */
+.bg_wrapper{
+    background-color: rgba(241, 241, 241, 0.575);
+    margin-bottom: 30px;
+}
+
+.info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+.info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+.info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+.info .close:hover {cursor: pointer;}
+.info .body {position: relative;overflow: hidden;}
+.info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
