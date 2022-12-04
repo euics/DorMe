@@ -53,24 +53,24 @@
 
                 <table id="short_table_1" class="grade_table" style="margin-top:2rem;">
                     <tr>
-                        <th class="grade_table_th" style="width:18%">분류</th>
-                        <td class="grade_table_td">재경기숙사</td>
+                        <th class="grade_table_th" style="width:18%">모집 조건</th>
+                        <td class="grade_table_td" th:text="${data1.getCondition1()}"></td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">가격</th>
-                        <td class="grade_table_td" >가격...(크롤링 필요)</td>
+                        <td class="grade_table_td" >279,300원/월 + 보증금 :100,000</td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">위치</th>
-                        <td class="grade_table_td">[08854] 서울특별시 관악구 난곡로30길 61</td>
+                        <td class="grade_table_td">05000 서울특별시 광진구 군자로 121 (군자동 98) 세종대학교 행복기숙사</td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">연락처</th>
-                        <td class="grade_table_td">TEL : 02-856-3559</td>
+                        <td class="grade_table_td">TEL. 02. 3143. 8200~3 | FAX. 02. 3143. 8206</td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">모집/선발</th>
-                        <td class="grade_table_td"></td>
+                        <td class="grade_table_td" th:text="|${data1.getPeriod1()}    ${data1.getPeriod2()}|"></td>
                     </tr>
 
                 </table>
@@ -84,27 +84,21 @@
 
                 <table class="grade_table" style="margin-top:2rem;">
                     <tr>
-                        <th class="grade_table_th" style="width:18%">식당</th>
+                        <th class="grade_table_th" style="width:18%">행정실</th>
                         <td class="grade_table_td">
-                            아침 : (월~토) 07:00~08:30 (일요일) 08:00~09:00
-                            <br>
-                            점심 : (월~토) 12:00~13:00 (일요일) 13:00~14:00
-                            <br>
-                            저녁 : (월~토) 18:30~20:00 (일요일) 18:30~20:00
-                            <br>
-                            주간식단 : 매주 토요일 홈페이지 및 게시판 게시</td>
+                            기숙사 3층에 위치</td>
                     </tr>
                     <tr>
-                        <th class="grade_table_th" style="width:18%">로비</th>
-                        <td class="grade_table_td">소파 8개 비치, 우편함, 내 고향 소식함 비치</td>
+                        <th class="grade_table_th" style="width:18%">무인택배보관</th>
+                        <td class="grade_table_td">1층 후문 출입구 및 휴게실 위치</td>
                     </tr>
                     <tr>
-                        <th class="grade_table_th" style="width:18%">거실</th>
-                        <td class="grade_table_td">사생방 5실, 샤워 · 화장실 · 세면대 각 2실, 세탁기(8.5kg) 1대, 구내전화 1대, 소파 · 탁자, 에어컨 1대</td>
+                        <th class="grade_table_th" style="width:18%">음용식수대</th>
+                        <td class="grade_table_td">각 층에 배치</td>
                     </tr>
                     <tr>
-                        <th class="grade_table_th" style="width:18%">독서실</th>
-                        <td class="grade_table_td">도서실(장서 3,500 여권 소장)</td>
+                        <th class="grade_table_th" style="width:18%">편의점</th>
+                        <td class="grade_table_td">기숙사 지하1층에 위치</td>
                     </tr>
                 </table>
 
@@ -117,32 +111,28 @@
 
                 <table class="grade_table" style="margin-top:2rem;">
                     <tr>
-                        <th class="grade_table_th" style="width:18%">탁구장 · 골프연습장</th>
-                        <td class="grade_table_td">탁구대 2대, 골프연습대 3대</td>
+                        <th class="grade_table_th" style="width:18%">카페</th>
+                        <td class="grade_table_td">기숙사 지하1층에 위치</td>
                     </tr>
                     <tr>
-                        <th class="grade_table_th" style="width:18%">체력단련실</th>
-                        <td class="grade_table_td">런닝머신 4대, 싸이클 2대, 버터플라이, 컬익스텐션, 스텝퍼 등 실내 운동기구</td>
+                        <th class="grade_table_th" style="width:18%">도시락집</th>
+                        <td class="grade_table_td">기숙사 지하1층에 위치</td>
                     </tr>
                     <tr>
-                        <th class="grade_table_th" style="width:18%">농구장</th>
-                        <td class="grade_table_td">우천시 사용 금지</td>
+                        <th class="grade_table_th" style="width:18%">세탁실(남)</th>
+                        <td class="grade_table_td">기숙사 3층에 위치</td>
+                    </tr>
+                    <tr>
+                        <th class="grade_table_th" style="width:18%">세탁실(여)</th>
+                        <td class="grade_table_td">기숙사 3층에 위치</td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">휴게실</th>
-                        <td class="grade_table_td">라면 자동판매기, 음료 자동판매기, 정수기 2대</td>
+                        <td class="grade_table_td">1층 후문 출입구 옆에 위치</td>
                     </tr>
                     <tr>
-                        <th class="grade_table_th" style="width:18%">PC 출력실</th>
-                        <td class="grade_table_td">PC 3대, 프린터 2대, 복합기 1대</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">사생방</th>
-                        <td class="grade_table_td">사생방 1실당 2인</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">공동세탁실 및 건조실</th>
-                        <td class="grade_table_td">세탁기 2대, 건조기 6대</td>
+                        <th class="grade_table_th" style="width:18%">우편함</th>
+                        <td class="grade_table_td">1층 후문 출입구 옆에 위치</td>
                     </tr>
                 </table>
             </div>

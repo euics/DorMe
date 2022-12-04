@@ -1,11 +1,16 @@
 package sejong.dormitory.service.dormitoryPageService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import sejong.dormitory.dto.dormitoryPage.SejongDormitory;
+import org.springframework.transaction.annotation.Transactional;
+import sejong.dormitory.entity.dormitoryPage.SejongDormitory;
+import sejong.dormitory.repository.dormitoryPage.SejongDormitoryRepository;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -14,25 +19,35 @@ import java.util.List;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
+@Component
 public class SejongDormitoryService {
 
     private static String URL1 = "https://happydorm.sejong.ac.kr/30/3010.kmc";
     private static String URL2 = "https://happydorm.sejong.ac.kr/20/2020.kmc";
     private static String URL3 = "https://happydorm.sejong.ac.kr/20/2040.kmc";
-    @PostConstruct
-    public SejongDormitory getData1() throws IOException {
+    private final SejongDormitoryRepository sejongDormitoryRepository;
+
+    @Transactional
+    public SejongDormitory getData(){
+        return sejongDormitoryRepository.findTopByOrderByIdDesc();
+    }
+    @Transactional @Scheduled(cron = "0 0 18 * * *")
+    public void getData1() throws IOException {
 
         Document doc = Jsoup.connect(URL1).get();
 
         String condition1 = doc.selectXpath("/html/body/div[4]/div/div[2]/div[2]/div[1]/div[3]/ul/li[1]/ul/li[1]").text();
         String condition2 = doc.selectXpath("/html/body/div[4]/div/div[2]/div[2]/div[1]/div[3]/ul/li[1]/ul/li[2]").text();
-
-
+        String period1 = doc.selectXpath("//*[@id=\"wrap_con\"]/div/div[2]/div[2]/div[1]/div[3]/ul/li[3]/div/table/tbody/tr[1]/td[3]").text();
+        String period2 = doc.selectXpath("/html/body/div[4]/div/div[2]/div[2]/div[1]/div[3]/ul/li[3]/div/table/tbody/tr[2]/td[2]").text();
         SejongDormitory sejongDormitory = SejongDormitory.builder()
                 .condition1(condition1)
                 .condition2(condition2)
+                .period1("1학기 : "+period1)
+                .period2("2학기 : "+period2)
                 .build();
-        return sejongDormitory;
+        sejongDormitoryRepository.save(sejongDormitory);
     }
 
     @PostConstruct

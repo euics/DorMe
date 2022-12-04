@@ -1,11 +1,16 @@
 package sejong.dormitory.service.dormitoryPageService;
 
+import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import sejong.dormitory.dto.dormitoryPage.GangwonDobong;
+import org.springframework.transaction.annotation.Transactional;
+import sejong.dormitory.entity.dormitoryPage.GangwonDobong;
+import sejong.dormitory.repository.dormitoryPage.GangwonDobongRepository;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -13,25 +18,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+@Component
 public class GangwonDobongService {
 
     private String URL1 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/enter_db";
     private String URL2 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/facility/facilities";
     private String URL3 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/facility/amenities";
     private String URL4 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/facility/scene";
+    private final GangwonDobongRepository gangwonDobongRepository;
 
-
-    @PostConstruct
-    public GangwonDobong getData1() throws IOException {
+    @Transactional
+    public GangwonDobong getData() {
+        return gangwonDobongRepository.findTopByOrderByIdDesc();
+    }
+    // 매일 오후 6시마다 웹 크롤링하여 데이터베이스 저장
+    @Transactional @Scheduled(cron = "0 0 18 * * *")
+    public void getData1() throws IOException {
         Document doc = Jsoup.connect(URL1).get();
         Elements elements = doc.selectXpath("//*[@id=\"content\"]/div/section/div/section/div[1]/p[1]");
         String recruitPeriod = elements.text();
 
-        List<String> recruitMember = new ArrayList<>();
-        elements = doc.selectXpath("//*[@id=\"content\"]/div/section/div/section/div[2]/table/tbody");
-        for (Element element : elements) {
-            recruitMember.add(element.select("tr").text());
-        }
+//        List<String> recruitMember = new ArrayList<>();
+//        elements = doc.selectXpath("//*[@id=\"content\"]/div/section/div/section/div[2]/table/tbody");
+//        for (Element element : elements) {
+//            recruitMember.add(element.select("tr").text());
+//        }
 
         elements = doc.selectXpath("//*[@id=\"content\"]/div/section/div/section/div[3]/p");
         String condition1 = elements.text();
@@ -47,13 +59,14 @@ public class GangwonDobongService {
 
         GangwonDobong gangwonDobong = GangwonDobong.builder()
                 .recruitPeriod(recruitPeriod)
-                .recruitMember(recruitMember)
+           //     .recruitMember(recruitMember)
                 .condition1(condition1)
                 .condition2(condition2)
                 .joinPrice(joinPrice)
                 .dormitoryPrice(dormitoryPrice)
                 .build();
-        return gangwonDobong;
+
+        gangwonDobongRepository.save(gangwonDobong);
     }
 
     @PostConstruct
