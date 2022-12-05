@@ -29,19 +29,6 @@ public class GyeonggiDoService {
     public GyeonggiDo getData(){
         return gyeonggiDoRepository.findTopByOrderByIdDesc();
     }
-    @PostConstruct
-    public List<GyeonggiDo> getData1() throws IOException{
-        List<GyeonggiDo> imageSrc = new ArrayList<>();
-        Document doc = Jsoup.connect(URL1).get();
-        Elements elements = doc.select("div.small_image ul li");
-        for(Element element : elements){
-            GyeonggiDo gyeonggiDo = GyeonggiDo.builder()
-                    .detailImagePath("http://www.gbfh.co.kr" + element.select("a img").attr("src"))
-                    .build();
-            imageSrc.add(gyeonggiDo);
-        }
-        return imageSrc;
-    }
     @Transactional @Scheduled(cron = "0 0 18 * * *")
     public void getData2() throws IOException{
         Document doc = Jsoup.connect(URL2).get();
@@ -59,5 +46,18 @@ public class GyeonggiDoService {
                 .recruitMemberInfo(recruitMemberInfo)
                 .build();
         gyeonggiDoRepository.save(gyeonggiDo);
+    }
+    @PostConstruct
+    public List<GyeonggiDo> getData1() throws IOException{
+        List<GyeonggiDo> imageSrc = new ArrayList<>();
+        Document doc = Jsoup.connect(URL1).get();
+        Elements elements = doc.select("div.small_image ul li");
+        for(Element element : elements){
+            GyeonggiDo gyeonggiDo = GyeonggiDo.builder()
+                    .detailImagePath("http://www.gbfh.co.kr" + element.select("a img").attr("src"))
+                    .build();
+            imageSrc.add(gyeonggiDo);
+        }
+        return imageSrc;
     }
 }
