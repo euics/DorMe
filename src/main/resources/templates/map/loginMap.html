@@ -34,7 +34,6 @@
 
 
   /*---------------------- 좌표 ------------------------*/
-
   var Sejong = [
     {
       title: '행복기숙사 - 새날관',
@@ -44,13 +43,6 @@
   ];
 
   var Dormitory = [
-    /*
-    {
-      title: '홍제행복기숙사',
-      content: "http://127.0.0.1:5500/Map/EntireMap.html",
-      latlng: new kakao.maps.LatLng(37.5862, 126.938)
-    },
-    */
     {
       title: '강원학사(도봉)',
       content: "http://localhost:8080/gangwonDobong",
@@ -61,22 +53,15 @@
       content: "http://localhost:8080/gangwonGwanak",
       latlng: new kakao.maps.LatLng(37.5001, 126.9222)
     },
-    /*
-    {
-      title: '경기푸른미래관',
-      content: "http://localhost:8080/gyeonggiDo",
-      latlng: new kakao.maps.LatLng(37.6518, 127.0212)
-    },
-    {
-      title: '평택시장학관',
-      content: "http://127.0.0.1:5500/Map/EntireMap.html",
-      latlng: new kakao.maps.LatLng(37.6342, 127.0229)
-    },
-    */
     {
       title: '탐라영재관',
       content: "http://localhost:8080/tamla",
       latlng: new kakao.maps.LatLng(37.5628, 126.8528)
+    },
+    {
+      title: '충남학사(서울)',
+      content: "http://localhost:8080/chongnam",
+      latlng: new kakao.maps.LatLng(37.4970, 126.8433)
     }
   ];
 
@@ -85,8 +70,8 @@
       title: '세종대학교',
       content: "http://localhost:8080/sejongDormitory",
       latlng: new kakao.maps.LatLng(37.5519,127.0737)
-    },
-  ]
+    }
+  ];
 
   // 지도에 마커를 표시하는 함수입니다
   function displayMarker(data) {
