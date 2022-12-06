@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import sejong.dormitory.entity.BaseEntity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -18,10 +17,13 @@ public class GangwonDobong extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String recruitPeriod;
-    private String condition1;
-    private String condition2;
-    private String joinPrice;
-    private String dormitoryPrice;
-    private String detailImagePath;
+    private String facility0;
+    private String context0;
+    private String imagePath0;
+    private String detailImagePath0;
+
+    private String facility1;
+    private String context1;
+    private String imagePath1;
+    private String detailImagePath1;
 }
