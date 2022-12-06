@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dorme</title>
+    <title>DorMe</title>
 
     <script src="https://kit.fontawesome.com/a99efffa96.js" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
     <link href="/css/Dormi_1.css" rel="stylesheet">
-    <link href="/css/MainHome.css" rel="stylesheet" >
     <link rel="icon" href="/images/favicon_img.png">
 </head>
 <body>
@@ -19,8 +18,8 @@
 <!-- 이미지 슬라이더 -->
 <div id="slideShow">
     <ul class="slides">
-        <li th:each="img, imgStat:${data2}">
-            <a th:href ="@{${img.detailImagePath}}"><img th:src="@{${img.detailImagePath}}"></a>
+        <li th:each="stat:${doBongData}">
+            <img th:src="@{${stat.detailImagePath0}}">
         </li>
     </ul>
     <p class="controller">
@@ -35,9 +34,9 @@
 
 
 
-<div class="dormi_name">강원 도봉학사</div>
+<div class="dormi_name">강원학사_도봉</div>
 
-<hr style="margin:2.5rem auto 2.5rem; width:45%; height:2px; border:0px; background-color: rgb(145, 140, 140);">
+<hr style="margin:2.5rem auto 2.5rem; width:1080px; height:2px; border:0px; background-color: rgb(145, 140, 140);">
 
 <div class="white_sec">
     <div class="dormi_box_wrap">
@@ -51,30 +50,30 @@
 
                 <hr>
 
-                <table id="short_table_1" class="grade_table" style="margin-top:2rem;">
+                <table class="grade_table" style="margin-top:2rem;">
                     <tr>
-                        <th class="grade_table_th" style="width:18%">모집 조건</th>
-                        <td class="grade_table_td" th:text="${data1.getCondition1()}"></td>
+                        <th class="grade_table_th" style="width:18%">분류</th>
+                        <td class="grade_table_td">재경기숙사</td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">가격</th>
-                        <td class="grade_table_td" th:text="${data1.getDormitoryPrice()}">가격...(크롤링 필요)</td>
+                        <td class="grade_table_td">입사비: 매년 이사회에서 결정 (현행 100,000원)<br>학사비: 매년이사회에서 결정 (현행 : 학기별 680,000원 납부, 1학기 3월~6월/2학기 9월~12월) </td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">위치</th>
-                        <td class="grade_table_td">[01460] 서울특별시 도붕구 도봉로110라길 50</td>
+                        <td class="grade_table_td">서울특별시 도봉구 도봉로110라길 50</td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">연락처</th>
-                        <td class="grade_table_td">TEL : 02-901-5700</td>
+                        <td class="grade_table_td">02-901-5700</td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">모집/선발</th>
-                        <td class="grade_table_td" th:text="${data1.getRecruitPeriod()}"></td>
+                        <td class="grade_table_td"><a href="http://injae.gwd.go.kr/injae/gwdormitory/dobong/enter_db" target="_blank">http://injae.gwd.go.kr/injae/gwdormitory/dobong/enter_db</a></td>
                     </tr>
-
                 </table>
 
+                <!-- 주요시설 -->
                 <div class="dormi_box_title">
                     <div style="margin-left:30px"><i class="fa-solid fa-bed"></i>주요시설</div>
                 </div>
@@ -82,28 +81,9 @@
                 <hr>
 
                 <table class="grade_table" style="margin-top:2rem;">
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">식당</th>
-                        <td class="grade_table_td">
-                            아침 : (월~토) 07:00~08:30 (일요일) 08:00~09:00
-                            <br>
-                            점심 : (월~토) 12:00~13:00 (일요일) 13:00~14:00
-                            <br>
-                            저녁 : (월~토) 18:30~20:00 (일요일) 18:30~20:00
-                            <br>
-                            주간식단 : 매주 토요일 홈페이지 및 게시판 게시</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">거실</th>
-                        <td class="grade_table_td">냉장고, 에어컨, 세탁기, 씽크대, 파우더테이블, 탁자, 신발장, 키폰전화기, 유무선공유기 등</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">공부방</th>
-                        <td class="grade_table_td">책상 4개, LAN망 4회선, 옷장 등</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">침실</th>
-                        <td class="grade_table_td">이층침대 2개 비치, 수면과 학습공간의 분리</td>
+                    <tr th:each="stat:${doBongData}">
+                        <th class="grade_table_th" style="width:18%" th:text="${stat.facility0}"></th>
+                        <td class="grade_table_td" th:text="${stat.context0}"></td>
                     </tr>
                 </table>
 
@@ -115,33 +95,9 @@
                 <hr>
 
                 <table class="grade_table" style="margin-top:2rem;">
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">휴게실</th>
-                        <td class="grade_table_td">멀티 자판기, 음료 자판기, 정수기, 전자렌지, TV, 제빙기, 토스트기 등</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">독서실</th>
-                        <td class="grade_table_td">50석</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">체력단련실</th>
-                        <td class="grade_table_td">런닝머신 2대, 싸이클 2대, 버터플라이, 컬익스텐션, 전동거꾸리, 벤치프레스 등</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">탁구장</th>
-                        <td class="grade_table_td">탁구대 2대</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">자치회실</th>
-                        <td class="grade_table_td">회의용 테이블, 접의자, 사물함 등</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">서고</th>
-                        <td class="grade_table_td">500여권</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">공동세탁실</th>
-                        <td class="grade_table_td">이불 등 대용량 세탁물 세탁가능, 마지막 이용자가 퇴실시 소등</td>
+                    <tr th:each="stat:${doBongData1}">
+                        <th class="grade_table_th" style="width:18%" th:text="${stat.facility1}"></th>
+                        <td class="grade_table_td" th:text="${stat.context1}"></td>
                     </tr>
                 </table>
             </div>
