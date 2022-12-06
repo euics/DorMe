@@ -17,10 +17,10 @@ public class GangwonDobongController {
 
     @GetMapping("/gangwonDobong")
     public String gangwonDobong(Model model) throws IOException{
-        GangwonDobong data1 = gangwonDobongService.getData();
-        List<GangwonDobong> data2 = gangwonDobongService.getData2();
-        model.addAttribute("data1",data1);
-        model.addAttribute("data2",data2);
+        List<GangwonDobong> doBongList = gangwonDobongService.getDormitoryData0();
+        List<GangwonDobong> doBongList1 = gangwonDobongService.getDormitoryData1();
+        model.addAttribute("doBongData", doBongList);
+        model.addAttribute("doBongData1", doBongList1);
         return "dormitoryPage/gangwonDobong";
     }
 }
