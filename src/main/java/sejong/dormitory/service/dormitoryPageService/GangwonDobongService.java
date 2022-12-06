@@ -1,12 +1,12 @@
 package sejong.dormitory.service.dormitoryPageService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sejong.dormitory.entity.dormitoryPage.GangwonDobong;
@@ -18,87 +18,71 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
+@Slf4j
 @RequiredArgsConstructor
-@Component
 public class GangwonDobongService {
-
-    private String URL1 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/enter_db";
-    private String URL2 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/facility/facilities";
-    private String URL3 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/facility/amenities";
-    private String URL4 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/facility/scene";
+    private final String url0 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/facility/facilities";
+    private final String baseUrl = "http://injae.gwd.go.kr";
     private final GangwonDobongRepository gangwonDobongRepository;
 
-    @Transactional
-    public GangwonDobong getData() {
-        return gangwonDobongRepository.findTopByOrderByIdDesc();
-    }
-    // 매일 오후 6시마다 웹 크롤링하여 데이터베이스 저장
-    @Transactional @Scheduled(cron = "0 0 18 * * *")
-    public void getData1() throws IOException {
-        Document doc = Jsoup.connect(URL1).get();
-        Elements elements = doc.selectXpath("//*[@id=\"content\"]/div/section/div/section/div[1]/p[1]");
-        String recruitPeriod = elements.text();
+    @PostConstruct @Transactional @Scheduled(cron = "0 0 18 * * *")
+    public List<GangwonDobong> getDormitoryData0() throws IOException {
+        List<GangwonDobong> gangwonDobongList0 = new ArrayList<>();
 
-//        List<String> recruitMember = new ArrayList<>();
-//        elements = doc.selectXpath("//*[@id=\"content\"]/div/section/div/section/div[2]/table/tbody");
-//        for (Element element : elements) {
-//            recruitMember.add(element.select("tr").text());
-//        }
+        Document doc = Jsoup.connect(url0).get();
+        Elements class_content_pack = doc.getElementsByClass("content-pack");
+        Elements article = class_content_pack.select("article");
 
-        elements = doc.selectXpath("//*[@id=\"content\"]/div/section/div/section/div[3]/p");
-        String condition1 = elements.text();
+        for (Element element : article) {
+            String image_Url = element.select("figure").select("img").attr("src");
+            String actual_Url = baseUrl + image_Url;
 
-        elements = doc.selectXpath("//*[@id=\"content\"]/div/section/div/section/div[4]/p");
-        String condition2 = elements.text();
+            Elements figure_h3 = element.select("h3");
 
-        elements = doc.selectXpath("//*[@id=\"content\"]/div/section/div/section/div[10]/p");
-        String joinPrice = elements.text();
+            Elements div_dl_dd = element.select("div dl dd");
 
-        elements= doc.selectXpath("//*[@id=\"content\"]/div/section/div/section/div[11]/p");
-        String dormitoryPrice = elements.text();
+            GangwonDobong dormitoryData = GangwonDobong.builder()
+                    .facility0(figure_h3.get(0).text())
+                    .context0(div_dl_dd.get(0).text())
+                    .imagePath0(image_Url)
+                    .detailImagePath0(actual_Url)
+                    .build();
+            gangwonDobongList0.add(dormitoryData);
+            gangwonDobongRepository.save(dormitoryData);
+        }
 
-        GangwonDobong gangwonDobong = GangwonDobong.builder()
-                .recruitPeriod(recruitPeriod)
-           //     .recruitMember(recruitMember)
-                .condition1(condition1)
-                .condition2(condition2)
-                .joinPrice(joinPrice)
-                .dormitoryPrice(dormitoryPrice)
-                .build();
-
-        gangwonDobongRepository.save(gangwonDobong);
+        return gangwonDobongList0;
     }
 
-    @PostConstruct
-    public List<GangwonDobong> getData2() throws IOException{
-        List<GangwonDobong> imgSrc = new ArrayList<>();
+    private final String url1 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/facility/amenities";
 
-        Document doc = Jsoup.connect(URL2).get();
-        Elements elements = doc.selectXpath("//*[@id=\"facility\"]/article");
-        for (Element element : elements) {
-            GangwonDobong gangwonDobong = GangwonDobong.builder()
-                    .detailImagePath("http://injae.gwd.go.kr/" +  element.select("figure img").attr("src"))
+    @PostConstruct @Transactional @Scheduled(cron = "0 0 18 * * *")
+    public List<GangwonDobong> getDormitoryData1() throws IOException {
+        List<GangwonDobong> gangwonDobongList1 = new ArrayList<>();
+
+        Document doc = Jsoup.connect(url1).get();
+        Elements class_content_pack = doc.getElementsByClass("content-pack");
+        Elements article = class_content_pack.select("article");
+
+        for (Element element : article) {
+            String image_Url = element.select("figure").select("img").attr("src");
+            String actual_Url = baseUrl + image_Url;
+
+            Elements figure_h3 = element.select("h3");
+
+            Elements div_dl_dd = element.select("div dl dd");
+
+            GangwonDobong dormitoryData = GangwonDobong.builder()
+                    .facility1(figure_h3.get(0).text())
+                    .context1(div_dl_dd.get(2).text())
+                    .imagePath1(image_Url)
+                    .detailImagePath1(actual_Url)
                     .build();
-            imgSrc.add(gangwonDobong);
+            gangwonDobongList1.add(dormitoryData);
+            gangwonDobongRepository.save(dormitoryData);
         }
 
-        doc = Jsoup.connect(URL3).get();
-        elements = doc.selectXpath("//*[@id=\"facility\"]/article");
-        for (Element element : elements) {
-            GangwonDobong gangwonDobong = GangwonDobong.builder()
-                    .detailImagePath("http://injae.gwd.go.kr/" +  element.select("figure img").attr("src"))
-                    .build();
-            imgSrc.add(gangwonDobong);
-        }
-
-        doc = Jsoup.connect(URL4).get();
-        elements = doc.selectXpath("//*[@id=\"facility\"]/article");
-        for (Element element : elements) {
-            GangwonDobong gangwonDobong = GangwonDobong.builder()
-                    .detailImagePath("http://injae.gwd.go.kr/" +  element.select("figure img").attr("src"))
-                    .build();
-            imgSrc.add(gangwonDobong);
-        }
-        return imgSrc;
+        return gangwonDobongList1;
     }
 }
