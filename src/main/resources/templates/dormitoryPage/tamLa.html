@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DorMe</title>
+
+    <script src="https://kit.fontawesome.com/a99efffa96.js" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+    <link href="/css/Dormi_1.css" rel="stylesheet">
+    <link rel="icon" href="/images/favicon_img.png">
+</head>
+<body>
+<nav th:replace="navbar :: navbarFragment"></nav>
+
+<!-- 이미지 슬라이더 -->
+<div id="slideShow">
+    <ul class="slides">
+        <li th:each="stat:${tamLaData}">
+            <img th:src="@{${stat.detailImagePath}}">
+        </li>
+    </ul>
+    <p class="controller">
+
+        <!-- &lang: 왼쪽 방향 화살표
+        &rang: 오른쪽 방향 화살표 -->
+        <span class="prev">&lang;</span>
+        <span class="next">&rang;</span>
+    </p>
+</div>
+<script src="/js/Dormi_1.js"></script>
+
+
+
+<div class="dormi_name">탐라영재관</div>
+
+<hr style="margin:2.5rem auto 2.5rem; width:1080px; height:2px; border:0px; background-color: rgb(145, 140, 140);">
+
+<div class="white_sec">
+    <div class="dormi_box_wrap">
+        <div class="dormi_box_grade">
+            <div style="padding:2.5rem 1.5rem 0 1.5rem">
+
+                <!-- 건물정보 -->
+                <div class="dormi_box_title">
+                    <div style="margin-left:30px"><i class="fa-solid fa-building"></i>건물정보</div>
+                </div>
+
+                <hr>
+
+                <table class="grade_table" style="margin-top:2rem;">
+                    <tr>
+                        <th class="grade_table_th" style="width:18%">분류</th>
+                        <td class="grade_table_td">재경기숙사</td>
+                    </tr>
+                    <tr>
+                        <th class="grade_table_th" style="width:18%">가격</th>
+                        <td class="grade_table_td">기숙사 사용료(한 학기 분) <br>2인실 : 900,000원(150,000원 × 6월) <br>3인실 : 720,000원(120,000원 × 6월)</td>
+                    </tr>
+                    <tr>
+                        <th class="grade_table_th" style="width:18%">위치</th>
+                        <td class="grade_table_td">서울특별시 강서구 양천로57길 10-10</td>
+                    </tr>
+                    <tr>
+                        <th class="grade_table_th" style="width:18%">연락처</th>
+                        <td class="grade_table_td">02-2659-0614</td>
+                    </tr>
+                    <tr>
+                        <th class="grade_table_th" style="width:18%">모집/선발</th>
+                        <td class="grade_table_td"><a href="http://www.jeju.go.kr/genius/guide/apply.htm" target="_blank">http://www.jeju.go.kr/genius/guide/apply.htm</a></td>
+                    </tr>
+                </table>
+
+                <!-- 주요시설 -->
+                <div class="dormi_box_title">
+                    <div style="margin-left:30px"><i class="fa-solid fa-bed"></i>주요시설</div>
+                </div>
+
+                <hr>
+
+                <table class="grade_table" style="margin-top:2rem;">
+                    <tr>
+                        <th class="grade_table_th" style="width:18%" th:text="${tamLaData[0].facility}"></th>
+                        <td class="grade_table_td" th:text="${tamLaData[0].context}"></td>
+                    </tr>
+                    <tr>
+                        <th class="grade_table_th" style="width:18%" th:text="${tamLaData[1].facility}"></th>
+                        <td class="grade_table_td" th:text="${tamLaData[1].context}"></td>
+                    </tr>
+                    <tr>
+                        <th class="grade_table_th" style="width:18%" th:text="${tamLaData[2].facility}"></th>
+                        <td class="grade_table_td" th:text="${tamLaData[2].context}"></td>
+                    </tr>
+                    <tr>
+                        <th class="grade_table_th" style="width:18%" th:text="${tamLaData[3].facility}"></th>
+                        <td class="grade_table_td" th:text="${tamLaData[3].context}"></td>
+                    </tr>
+                </table>
+
+                <!-- 편의시설 -->
+                <div class="dormi_box_title">
+                    <div style="margin-left:30px"><i class="fa-solid fa-warehouse"></i>편의시설</div>
+                </div>
+
+                <hr>
+
+                <table class="grade_table" style="margin-top:2rem;">
+                    <tr>
+                        <th class="grade_table_th" style="width:18%" th:text="${tamLaData[4].facility}"></th>
+                        <td class="grade_table_td" th:text="${tamLaData[4].context}"></td>
+                    </tr>
+                    <tr>
+                        <th class="grade_table_th" style="width:18%" th:text="${tamLaData[5].facility}"></th>
+                        <td class="grade_table_td" th:text="${tamLaData[5].context}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
