@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sejong.dormitory.entity.dormitoryPage.TamLa;
@@ -26,7 +27,7 @@ public class TamLaService {
 
     private final TamLaRepository tamLaRepository;
 
-    @PostConstruct
+    @PostConstruct @Transactional @Scheduled(cron = "0 0 18 * * *")
     public List<TamLa> getDormitoryData() throws IOException {
         List<TamLa> tamLaList = new ArrayList<>();
 
@@ -60,9 +61,6 @@ public class TamLaService {
             tamLaList.add(dormitoryData1);
             tamLaRepository.save(dormitoryData1);
         }
-
-        log.info("{}", tamLaList);
-
         return tamLaList;
     }
 }
