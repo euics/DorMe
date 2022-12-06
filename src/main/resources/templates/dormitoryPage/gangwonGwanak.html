@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dorme</title>
+    <title>DorMe</title>
 
     <script src="https://kit.fontawesome.com/a99efffa96.js" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
     <link href="/css/Dormi_1.css" rel="stylesheet">
-    <link href="/css/MainHome.css" rel="stylesheet" >
     <link rel="icon" href="/images/favicon_img.png">
 </head>
 <body>
@@ -19,8 +18,8 @@
 <!-- 이미지 슬라이더 -->
 <div id="slideShow">
     <ul class="slides">
-        <li th:each="img, imgStat:${data2}">
-            <a th:href ="@{${img.detailImagePath}}"><img th:src="@{${img.detailImagePath}}"></a>
+        <li th:each="stat:${gangwonGwanakData0}">
+            <img th:src="@{${stat.detailImagePath0}}">
         </li>
     </ul>
     <p class="controller">
@@ -35,9 +34,9 @@
 
 
 
-<div class="dormi_name">강원 관악학사</div>
+<div class="dormi_name">강원학사_관악</div>
 
-<hr style="margin:2.5rem auto 2.5rem; width:45%; height:2px; border:0px; background-color: rgb(145, 140, 140);">
+<hr style="margin:2.5rem auto 2.5rem; width:1080px; height:2px; border:0px; background-color: rgb(145, 140, 140);">
 
 <div class="white_sec">
     <div class="dormi_box_wrap">
@@ -51,28 +50,27 @@
 
                 <hr>
 
-                <table id="short_table_1" class="grade_table" style="margin-top:2rem;">
+                <table class="grade_table" style="margin-top:2rem;">
                     <tr>
-                        <th class="grade_table_th" style="width:18%">모집 조건</th>
-                        <td class="grade_table_td" th:text="${data1.getCondition1()}"></td>
+                        <th class="grade_table_th" style="width:18%">분류</th>
+                        <td class="grade_table_td">재경기숙사</td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">가격</th>
-                        <td class="grade_table_td" th:text="${data1.getDormitoryPrice()}">가격...(크롤링 필요)</td>
+                        <td class="grade_table_td">가격...(크롤링 필요)</td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">위치</th>
-                        <td class="grade_table_td">[08854] 서울특별시 관악구 난곡로30길 61</td>
+                        <td class="grade_table_td">서울특별시 관악구 난곡로30길 61</td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">연락처</th>
-                        <td class="grade_table_td">TEL : 02-856-3559</td>
+                        <td class="grade_table_td">02-856-3559</td>
                     </tr>
                     <tr>
                         <th class="grade_table_th" style="width:18%">모집/선발</th>
-                        <td class="grade_table_td" th:text="${data1.getRecruitPeriod()}"></td>
+                        <td class="grade_table_td"><a href="http://injae.gwd.go.kr/injae/gwdormitory/gwanag/enter_ga" target="_blank">http://injae.gwd.go.kr/injae/gwdormitory/gwanag/enter_ga</a></td>
                     </tr>
-
                 </table>
 
                 <!-- 주요시설 -->
@@ -83,28 +81,9 @@
                 <hr>
 
                 <table class="grade_table" style="margin-top:2rem;">
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">식당</th>
-                        <td class="grade_table_td">
-                            아침 : (월~토) 07:00~08:30 (일요일) 08:00~09:00
-                            <br>
-                            점심 : (월~토) 12:00~13:00 (일요일) 13:00~14:00
-                            <br>
-                            저녁 : (월~토) 18:30~20:00 (일요일) 18:30~20:00
-                            <br>
-                            주간식단 : 매주 토요일 홈페이지 및 게시판 게시</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">로비</th>
-                        <td class="grade_table_td">소파 8개 비치, 우편함, 내 고향 소식함 비치</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">거실</th>
-                        <td class="grade_table_td">사생방 5실, 샤워 · 화장실 · 세면대 각 2실, 세탁기(8.5kg) 1대, 구내전화 1대, 소파 · 탁자, 에어컨 1대</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">독서실</th>
-                        <td class="grade_table_td">도서실(장서 3,500 여권 소장)</td>
+                    <tr th:each="stat:${gangwonGwanakData0}">
+                        <th class="grade_table_th" style="width:18%" th:text="${stat.facility0}"></th>
+                        <td class="grade_table_td" th:text="${stat.context0}"></td>
                     </tr>
                 </table>
 
@@ -116,33 +95,13 @@
                 <hr>
 
                 <table class="grade_table" style="margin-top:2rem;">
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">탁구장 · 골프연습장</th>
-                        <td class="grade_table_td">탁구대 2대, 골프연습대 3대</td>
+                    <tr th:each="stat:${gangwonGwanakData1}">
+                        <th class="grade_table_th" style="width:18%" th:text="${stat.facility1}"></th>
+                        <td class="grade_table_td" th:text="${stat.context1}"></td>
                     </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">체력단련실</th>
-                        <td class="grade_table_td">런닝머신 4대, 싸이클 2대, 버터플라이, 컬익스텐션, 스텝퍼 등 실내 운동기구</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">농구장</th>
-                        <td class="grade_table_td">우천시 사용 금지</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">휴게실</th>
-                        <td class="grade_table_td">라면 자동판매기, 음료 자동판매기, 정수기 2대</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">PC 출력실</th>
-                        <td class="grade_table_td">PC 3대, 프린터 2대, 복합기 1대</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">사생방</th>
-                        <td class="grade_table_td">사생방 1실당 2인</td>
-                    </tr>
-                    <tr>
-                        <th class="grade_table_th" style="width:18%">공동세탁실 및 건조실</th>
-                        <td class="grade_table_td">세탁기 2대, 건조기 6대</td>
+                    <tr th:each="stat:${gangwonGwanakData2}">
+                        <th class="grade_table_th" style="width:18%" th:text="${stat.facility2}"></th>
+                        <td class="grade_table_td" th:text="${stat.context2}"></td>
                     </tr>
                 </table>
             </div>
