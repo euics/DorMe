@@ -29,6 +29,8 @@ public class TamLaService {
 
     @PostConstruct @Transactional @Scheduled(cron = "0 0 18 * * *")
     public List<TamLa> getDormitoryData() throws IOException {
+        if(tamLaRepository.existsById(1L))
+            tamLaRepository.deleteAll();
         List<TamLa> tamLaList = new ArrayList<>();
 
         Document doc = Jsoup.connect(url).get();
@@ -62,5 +64,9 @@ public class TamLaService {
             tamLaRepository.save(dormitoryData1);
         }
         return tamLaList;
+    }
+
+    public List<TamLa> findFromDB() throws IOException{
+        return tamLaRepository.findAll();
     }
 }
