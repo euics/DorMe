@@ -10,7 +10,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sejong.dormitory.entity.dormitoryPage.ChongNam;
-import sejong.dormitory.entity.dormitoryPage.gangwongwanak.GangwonGwanak0;
 import sejong.dormitory.repository.dormitoryPage.ChongNamRepository;
 
 import javax.annotation.PostConstruct;
