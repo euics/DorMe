@@ -14,7 +14,6 @@ import sejong.dormitory.repository.dormitoryPage.GangwonDobongRepository;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,18 +22,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GangwonDobongService {
     private final String url0 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/facility/facilities";
+    private final String url1 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/facility/amenities";
     private final String baseUrl = "http://injae.gwd.go.kr";
     private final GangwonDobongRepository gangwonDobongRepository;
 
     @PostConstruct @Transactional @Scheduled(cron = "0 0 18 * * *")
-    public List<GangwonDobong> getDormitoryData0() throws IOException {
-        List<GangwonDobong> gangwonDobongList0 = new ArrayList<>();
+    public void getDormitoryData() throws IOException {
+        if(gangwonDobongRepository.existsById(1L))
+            gangwonDobongRepository.deleteAll();
 
-        Document doc = Jsoup.connect(url0).get();
-        Elements class_content_pack = doc.getElementsByClass("content-pack");
-        Elements article = class_content_pack.select("article");
+        Document doc0 = Jsoup.connect(url0).get();
+        Elements class_content_pack0 = doc0.getElementsByClass("content-pack");
+        Elements article0 = class_content_pack0.select("article");
 
-        for (Element element : article) {
+        for (Element element : article0) {
             String image_Url = element.select("figure").select("img").attr("src");
             String actual_Url = baseUrl + image_Url;
 
@@ -48,24 +49,14 @@ public class GangwonDobongService {
                     .imagePath0(image_Url)
                     .detailImagePath0(actual_Url)
                     .build();
-            gangwonDobongList0.add(dormitoryData);
             gangwonDobongRepository.save(dormitoryData);
         }
 
-        return gangwonDobongList0;
-    }
+        Document doc1 = Jsoup.connect(url1).get();
+        Elements class_content_pack1 = doc1.getElementsByClass("content-pack");
+        Elements article1 = class_content_pack1.select("article");
 
-    private final String url1 = "http://injae.gwd.go.kr/injae/gwdormitory/dobong/facility/amenities";
-
-    @PostConstruct @Transactional @Scheduled(cron = "0 0 18 * * *")
-    public List<GangwonDobong> getDormitoryData1() throws IOException {
-        List<GangwonDobong> gangwonDobongList1 = new ArrayList<>();
-
-        Document doc = Jsoup.connect(url1).get();
-        Elements class_content_pack = doc.getElementsByClass("content-pack");
-        Elements article = class_content_pack.select("article");
-
-        for (Element element : article) {
+        for (Element element : article1) {
             String image_Url = element.select("figure").select("img").attr("src");
             String actual_Url = baseUrl + image_Url;
 
@@ -79,10 +70,11 @@ public class GangwonDobongService {
                     .imagePath1(image_Url)
                     .detailImagePath1(actual_Url)
                     .build();
-            gangwonDobongList1.add(dormitoryData);
             gangwonDobongRepository.save(dormitoryData);
         }
+    }
 
-        return gangwonDobongList1;
+    public List<GangwonDobong> findFromDB() throws IOException{
+        return gangwonDobongRepository.findAll();
     }
 }
