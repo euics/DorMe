@@ -1,4 +1,4 @@
-package sejong.dormitory.entity.dormitoryPage;
+package sejong.dormitory.entity.dormitoryPage.gangwongwanak;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,14 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Builder
-public class GangwonGwanak extends BaseEntity {
+public class GangwonGwanak0 extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -25,14 +24,4 @@ public class GangwonGwanak extends BaseEntity {
     private String context0;
     private String imagePath0;
     private String detailImagePath0;
-
-    private String facility1;
-    private String context1;
-    private String imagePath1;
-    private String detailImagePath1;
-
-    private String facility2;
-    private String context2;
-    private String imagePath2;
-    private String detailImagePath2;
 }
