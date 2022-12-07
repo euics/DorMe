@@ -17,10 +17,8 @@ public class GangwonDobongController {
 
     @GetMapping("/gangwonDobong")
     public String gangwonDobong(Model model) throws IOException{
-        List<GangwonDobong> doBongList = gangwonDobongService.getDormitoryData0();
-        List<GangwonDobong> doBongList1 = gangwonDobongService.getDormitoryData1();
-        model.addAttribute("doBongData", doBongList);
-        model.addAttribute("doBongData1", doBongList1);
+        List<GangwonDobong> dormitoryData = gangwonDobongService.findFromDB();
+        model.addAttribute("doBongData", dormitoryData);
         return "dormitoryPage/gangwonDobong";
     }
 }
