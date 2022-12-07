@@ -18,8 +18,11 @@
 <!-- 이미지 슬라이더 -->
 <div id="slideShow">
     <ul class="slides">
-        <li th:each="stat:${gangwonGwanakData0}">
-            <img th:src="@{${stat.detailImagePath0}}">
+        <li th:each="stat:${gangwonGwanakData}">
+            <img th:if="${stat.detailImagePath0 != null}" th:src="@{${stat.detailImagePath0}}">
+        </li>
+        <li th:each="stat:${gangwonGwanakData}">
+            <img th:if="${stat.detailImagePath2 != null}" th:src="@{${stat.detailImagePath2}}">
         </li>
     </ul>
     <p class="controller">
@@ -81,9 +84,9 @@
                 <hr>
 
                 <table class="grade_table" style="margin-top:2rem;">
-                    <tr th:each="stat:${gangwonGwanakData0}">
-                        <th class="grade_table_th" style="width:18%" th:text="${stat.facility0}"></th>
-                        <td class="grade_table_td" th:text="${stat.context0}"></td>
+                    <tr th:each="stat:${gangwonGwanakData}">
+                        <th class="grade_table_th" style="width:18%" th:if="${stat.facility0 != null}" th:text="${stat.facility0}"></th>
+                        <td class="grade_table_td" th:if="${stat.context0 != null}" th:text="${stat.context0}"></td>
                     </tr>
                 </table>
 
@@ -95,13 +98,11 @@
                 <hr>
 
                 <table class="grade_table" style="margin-top:2rem;">
-                    <tr th:each="stat:${gangwonGwanakData1}">
-                        <th class="grade_table_th" style="width:18%" th:text="${stat.facility1}"></th>
-                        <td class="grade_table_td" th:text="${stat.context1}"></td>
-                    </tr>
-                    <tr th:each="stat:${gangwonGwanakData2}">
-                        <th class="grade_table_th" style="width:18%" th:text="${stat.facility2}"></th>
-                        <td class="grade_table_td" th:text="${stat.context2}"></td>
+                    <tr th:each="stat:${gangwonGwanakData}">
+                        <th class="grade_table_th" style="width:18%" th:if="${stat.facility1 != null}" th:text="${stat.facility1}"></th>
+                        <td class="grade_table_td" th:if="${stat.context1 != null}" th:text="${stat.context1}"></td>
+                        <th class="grade_table_th" style="width:18%" th:if="${stat.facility2 != null}" th:text="${stat.facility2}"></th>
+                        <td class="grade_table_td" th:if="${stat.context2 != null}" th:text="${stat.context2}"></td>
                     </tr>
                 </table>
             </div>
