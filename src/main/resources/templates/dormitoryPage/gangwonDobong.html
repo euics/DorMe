@@ -19,8 +19,14 @@
 <div id="slideShow">
     <ul class="slides">
         <li th:each="stat:${doBongData}">
-            <img th:src="@{${stat.detailImagePath0}}">
+            <img th:if="${stat.detailImagePath0 != null}" th:src="@{${stat.detailImagePath0}}">
+            <img th:if="${stat.detailImagePath1 != null}" th:src="@{${stat.detailImagePath1}}">
         </li>
+        <!--
+        <li th:each="stat:${doBongData}">
+            <img th:if="${stat.detailImagePath1 != null}" th:src="@{${stat.detailImagePath1}}">
+        </li>
+        -->
     </ul>
     <p class="controller">
 
@@ -82,8 +88,8 @@
 
                 <table class="grade_table" style="margin-top:2rem;">
                     <tr th:each="stat:${doBongData}">
-                        <th class="grade_table_th" style="width:18%" th:text="${stat.facility0}"></th>
-                        <td class="grade_table_td" th:text="${stat.context0}"></td>
+                        <th class="grade_table_th" style="width:18%" th:if="${stat.facility0 != null}" th:text="${stat.facility0}"></th>
+                        <td class="grade_table_td" th:if="${stat.context0 != null}" th:text="${stat.context0}"></td>
                     </tr>
                 </table>
 
@@ -95,9 +101,9 @@
                 <hr>
 
                 <table class="grade_table" style="margin-top:2rem;">
-                    <tr th:each="stat:${doBongData1}">
-                        <th class="grade_table_th" style="width:18%" th:text="${stat.facility1}"></th>
-                        <td class="grade_table_td" th:text="${stat.context1}"></td>
+                    <tr th:each="stat:${doBongData}">
+                        <th class="grade_table_th" style="width:18%" th:if="${stat.facility1 != null}" th:text="${stat.facility1}"></th>
+                        <td class="grade_table_td" th:if="${stat.context1 != null}" th:text="${stat.context1}"></td>
                     </tr>
                 </table>
             </div>
