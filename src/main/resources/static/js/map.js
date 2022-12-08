@@ -1,7 +1,7 @@
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
         center: new kakao.maps.LatLng(37.5855,127.0194), // 지도의 중심좌표
-        level: 5 // 지도의 확대 레벨
+        level: 8 // 지도의 확대 레벨
     };
 
 // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -130,14 +130,6 @@ var Sogang = [
         title: '벨라르미노 학사',
         content: '<div class="wind" style="padding:5px;">10</div>',
         latlng: new kakao.maps.LatLng(37.5492,126.9401)
-    },
-];
-
-var Sejong = [
-    {
-        title: '행복기숙사 - 새날관',
-        content: '<div class="wind" style="padding:5px;">11</div>',
-        latlng: new kakao.maps.LatLng(37.5534,127.0727)
     },
 ];
 
@@ -439,11 +431,6 @@ var University = [
         latlng: new kakao.maps.LatLng(37.5511,126.9411)
     },
     {
-        title: '세종대학교',
-        content: '11. 세종대학교',
-        latlng: new kakao.maps.LatLng(37.5519,127.0737)
-    },
-    {
         title: '숭실대학교',
         content: '12. 숭실대학교',
         latlng: new kakao.maps.LatLng(37.4965,126.9568)
@@ -542,16 +529,6 @@ var Dormitory = [
         latlng: new kakao.maps.LatLng(37.5862, 126.938)
     },
     {
-        title: '강원학사(도봉)',
-        content: '공통',
-        latlng: new kakao.maps.LatLng(37.6501, 127.0349)
-    },
-    {
-        title: '강원학사(관악)',
-        content: '공통',
-        latlng: new kakao.maps.LatLng(37.5001, 126.9222)
-    },
-    {
         title: '경기푸른미래관',
         content: '공통',
         latlng: new kakao.maps.LatLng(37.6518, 127.0212)
@@ -562,6 +539,103 @@ var Dormitory = [
         latlng: new kakao.maps.LatLng(37.6342, 127.0229)
     }
 ];
+
+
+var Sample = [
+    {
+        title: '행복기숙사 - 새날관',
+        content: "http://43.200.215.193:8080/sejongDormitory",
+        latlng: new kakao.maps.LatLng(37.5534,127.0727)
+    },
+    {
+        title: '강원학사(도봉)',
+        content: "http://43.200.215.193:8080/gangwonDobong",
+        latlng: new kakao.maps.LatLng(37.6501, 127.0349)
+    },
+    {
+        title: '강원학사(관악)',
+        content: "http://43.200.215.193:8080/gangwonGwanak",
+        latlng: new kakao.maps.LatLng(37.5001, 126.9222)
+    },
+    {
+        title: '탐라영재관',
+        content: "http://43.200.215.193:8080/tamla",
+        latlng: new kakao.maps.LatLng(37.5628, 126.8528)
+    },
+    {
+        title: '충남학사(서울)',
+        content: "http://43.200.215.193:8080/chongnam",
+        latlng: new kakao.maps.LatLng(37.4970, 126.8433)
+    },
+];
+
+var UniversitySample = [
+    {
+        title: '11. 세종대학교',
+        content: "http://43.200.215.193:8080/sejongDormitory",
+        latlng: new kakao.maps.LatLng(37.5519,127.0737)
+    }
+];
+
+// 지도에 마커를 표시하는 함수입니다
+function displayMarker(data) {
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: data.latlng,
+        title: data.title,
+        clickable: true,
+    });
+
+    kakao.maps.event.addListener(marker, 'click', function() {
+        window.open(data.content);
+    });
+}
+
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+var imageSize = new kakao.maps.Size(24, 35); // 마커 이미지의 이미지 크기
+var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);//이미지 적용
+
+function displayMarkerIMG(data) {
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: data.latlng,
+        image : markerImage, // 마커 이미지
+        title: data.title,
+        clickable: true
+    });
+
+    kakao.maps.event.addListener(marker, 'click', function() {
+        window.open(data.content);
+    });
+}
+
+for(let i=0; i < Sample.length; i++){
+    var data = Sample[i];
+    displayMarker(data);
+}
+
+for(let i=0; i < UniversitySample.length; i++){
+    var data = UniversitySample[i];
+    displayMarkerIMG(data);
+}
+
+
+/*----------------------커스텀 오버레이------------------------*/
+for (var i = 0; i < UniversitySample.length; i ++) {
+    var customOverlay = new kakao.maps.CustomOverlay({
+        position: UniversitySample[i].latlng,
+    });
+    customOverlay.setMap(map);
+}
+
+for (var i = 0; i < Sample.length; i ++) {
+    var customOverlay = new kakao.maps.CustomOverlay({
+        position: Sample[i].latlng,
+    });
+    customOverlay.setMap(map);
+}
+
 
 function closeOverlay() {
     overlay.setMap(null);
@@ -580,8 +654,6 @@ for (var i = 0; i < Dormitory.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Dormitory[i].latlng,
-        content : Dormitory[i].content, // 마커의 타이틀, 마커에 마우스를 올리면 content:타이틀이 표시됩니다
-        removable : true
     });
     customOverlay.setMap(map);
 }
@@ -597,7 +669,6 @@ for (var i = 0; i < Snu.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Snu[i].latlng,
-        content: Snu[i].content,
         removable : true
     });
     customOverlay.setMap(map);
@@ -614,7 +685,6 @@ for (var i = 0; i < KonKuK.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: KonKuK[i].latlng,
-        content: KonKuK[i].content,
         removable : true
     });
     customOverlay.setMap(map);
@@ -630,7 +700,6 @@ for (var i = 0; i < Kyonggi.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Kyonggi[i].latlng,
-        content: Kyonggi[i].content,
         removable : true
     });
     customOverlay.setMap(map);
@@ -646,7 +715,6 @@ for (var i = 0; i < Khu.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Khu[i].latlng,
-        content: Khu[i].content,
         removable : true
     });
     customOverlay.setMap(map);
@@ -662,7 +730,6 @@ for (var i = 0; i < Korea.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Korea[i].latlng,
-        content: Korea[i].content,
         removable : true
     });
     customOverlay.setMap(map);
@@ -677,7 +744,6 @@ for (var i = 0; i < Kw.length; i ++) {
     });
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Kw[i].latlng,
-        content: Kw[i].content,
         removable : true
     });
     customOverlay.setMap(map);
@@ -694,7 +760,6 @@ for (var i = 0; i < Kookmin.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Kookmin[i].latlng,
-        content: Kookmin[i].content,
         removable : true
 
     });
@@ -712,7 +777,6 @@ for (var i = 0; i < Dongguk.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Dongguk[i].latlng,
-        content: Dongguk[i].content,
         removable : true
 
     });
@@ -730,7 +794,6 @@ for (var i = 0; i < Mju.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Mju[i].latlng,
-        content: Mju[i].content,
         removable : true
 
     });
@@ -748,25 +811,6 @@ for (var i = 0; i < Sogang.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Sogang[i].latlng,
-        content: Sogang[i].content,
-        removable : true
-
-    });
-    customOverlay.setMap(map);
-
-}
-for (var i = 0; i < Sejong.length; i ++) {
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-        map: map,
-        clickable: true, // 마커를 표시할 지도
-        position: Sejong[i].latlng,
-        title : Sejong[i].title,
-    });
-    marker.setMap(map);
-    var customOverlay = new kakao.maps.CustomOverlay({
-        position: Sejong[i].latlng,
-        content: Sejong[i].content,
         removable : true
 
     });
@@ -784,7 +828,6 @@ for (var i = 0; i < Ssu.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Ssu[i].latlng,
-        content: Ssu[i].content,
         removable : true
 
     });
@@ -802,7 +845,6 @@ for (var i = 0; i < Yonsei.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Yonsei[i].latlng,
-        content: Yonsei[i].content,
         removable : true
 
     });
@@ -820,7 +862,6 @@ for (var i = 0; i < Cau.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Cau[i].latlng,
-        content: Cau[i].content,
         removable : true
 
     });
@@ -838,7 +879,6 @@ for (var i = 0; i < Hanyang.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Hanyang[i].latlng,
-        content: Hanyang[i].content,
         removable : true
 
     });
@@ -856,7 +896,6 @@ for (var i = 0; i < Hongik.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Hongik[i].latlng,
-        content: Hongik[i].content,
         removable : true
 
     });
@@ -874,7 +913,6 @@ for (var i = 0; i < Skku.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Skku[i].latlng,
-        content: Skku[i].content,
         removable : true
 
     });
@@ -892,7 +930,6 @@ for (var i = 0; i < Catholic.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Catholic[i].latlng,
-        content: Catholic[i].content,
         removable : true
 
     });
@@ -910,7 +947,6 @@ for (var i = 0; i < Kaist.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Kaist[i].latlng,
-        content: Kaist[i].content,
         removable : true
 
     });
@@ -928,7 +964,6 @@ for (var i = 0; i < Ewha.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Ewha[i].latlng,
-        content: Ewha[i].content,
         removable : true
 
     });
@@ -946,7 +981,6 @@ for (var i = 0; i < Sungshin.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Sungshin[i].latlng,
-        content: Sungshin[i].content,
         removable : true
 
     });
@@ -964,7 +998,6 @@ for (var i = 0; i < Sookmyung.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Sookmyung[i].latlng,
-        content: Sookmyung[i].content,
         removable : true
 
     });
@@ -982,7 +1015,6 @@ for (var i = 0; i < Snue.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Snue[i].latlng,
-        content: Snue[i].content,
         removable : true
 
     });
@@ -1000,7 +1032,6 @@ for (var i = 0; i < Hufs.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Hufs[i].latlng,
-        content: Hufs[i].content,
         removable : true
 
     });
@@ -1018,7 +1049,6 @@ for (var i = 0; i < Karts.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Karts[i].latlng,
-        content: Karts[i].content,
         removable : true
 
     });
@@ -1036,7 +1066,6 @@ for (var i = 0; i < Seoultech.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: Seoultech[i].latlng,
-        content: Seoultech[i].content,
         removable : true
     });
     customOverlay.setMap(map);
@@ -1067,7 +1096,6 @@ for (var i = 0; i < University.length; i ++) {
     marker.setMap(map);
     var customOverlay = new kakao.maps.CustomOverlay({
         position: University[i].latlng,
-        content: University[i].content,
         xAnchor: 0.3,
         yAnchor: 0.91
     });

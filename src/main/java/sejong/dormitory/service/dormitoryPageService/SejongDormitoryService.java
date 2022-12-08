@@ -32,7 +32,7 @@ public class SejongDormitoryService {
     public SejongDormitory getData(){
         return sejongDormitoryRepository.findTopByOrderByIdDesc();
     }
-    @Transactional @Scheduled(cron = "0 0 18 * * *")
+    @PostConstruct @Transactional @Scheduled(cron = "0 0 18 * * *")
     public void getData1() throws IOException {
 
         Document doc = Jsoup.connect(URL1).get();
