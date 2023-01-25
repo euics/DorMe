@@ -292,5 +292,5 @@ DorMe 프로젝트는 학생들마다 갈 수 있는 학사관 정보 취합 웹
 ### 1. 시연
 https://youtu.be/5hLvlM2dKLE
 <br>
-### 2. 베포
+### 2. 배포
 https://youtu.be/-c9Ni6BiGDQ
